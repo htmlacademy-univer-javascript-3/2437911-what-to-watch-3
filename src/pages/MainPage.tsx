@@ -3,11 +3,12 @@ import Footer from '../components/Footer.tsx';
 import PromoFilmCard from '../components/PromoFilmCard.tsx';
 import CatalogFilmCard from '../components/CatalogFilmCard.tsx';
 import {FilmInfo} from '../Types/FilmInfo.ts';
+import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 
-function MainPage(promoFilmCardProps: FilmInfo & { isGuest: boolean }): JSX.Element {
+function MainPage(promoFilmCardProps: FilmInfo & { authStatus: AuthorizationStatuses }): JSX.Element {
   return (
     <>
-      <PromoFilmCard {...promoFilmCardProps} isGuest={promoFilmCardProps.isGuest}/>
+      <PromoFilmCard {...promoFilmCardProps} authStatus={promoFilmCardProps.authStatus}/>
 
       <div className="page-content">
         <section className="catalog">

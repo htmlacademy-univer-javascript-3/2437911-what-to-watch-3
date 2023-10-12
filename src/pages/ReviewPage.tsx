@@ -2,6 +2,7 @@ import {JSX} from 'react';
 import WTWLogo from '../components/WTWLogo.tsx';
 import UserBlock from '../components/UserBlock.tsx';
 import {FilmInfo} from '../Types/FilmInfo.ts';
+import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 
 const MINRATING = 1;
 const MAXRATING = 10;
@@ -31,7 +32,7 @@ function ReviewPage({title}: FilmInfo): JSX.Element {
             </ul>
           </nav>
 
-          <UserBlock isGuest={false}/>
+          <UserBlock authStatus={AuthorizationStatuses.AUTH}/>
         </header>
 
         <div className="film-card__poster film-card__poster--small">

@@ -1,13 +1,8 @@
 import {JSX} from 'react';
+import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 
-function UserBlock({isGuest}: { isGuest: boolean }): JSX.Element {
-  if (isGuest) {
-    return (
-      <div className="user-block">
-        <a href="sign-in.html" className="user-block__link">Sign in</a>
-      </div>
-    );
-  } else {
+function UserBlock({authStatus}: { authStatus: AuthorizationStatuses }): JSX.Element {
+  if (authStatus === AuthorizationStatuses.AUTH) {
     return (
       <ul className="user-block">
         <li className="user-block__item">
@@ -20,6 +15,13 @@ function UserBlock({isGuest}: { isGuest: boolean }): JSX.Element {
         </li>
       </ul>
     );
+  } else {
+    return (
+      <div className="user-block">
+        <a href="sign-in.html" className="user-block__link">Sign in</a>
+      </div>
+    );
+
   }
 }
 

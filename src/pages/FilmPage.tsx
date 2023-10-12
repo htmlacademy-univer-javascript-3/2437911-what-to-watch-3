@@ -3,29 +3,13 @@ import Footer from '../components/Footer.tsx';
 import CatalogLikeThis from '../components/CatalogLikeThis.tsx';
 import FilmCardPanel from '../components/FilmCardPanel.tsx';
 import {FilmInfo} from '../Types/FilmInfo.ts';
-import DetailsComponent from '../components/FilmPage/DetailsComponent.tsx';
-import ReviewsComponent from '../components/FilmPage/ReviewsComponent.tsx';
-import OverviewComponent from '../components/FilmPage/OverviewComponent.tsx';
 import WTWLogo from '../components/WTWLogo.tsx';
 import UserBlock from '../components/UserBlock.tsx';
+import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
+import OverviewComponent from '../components/FilmPage/OverviewComponent.tsx';
 
-enum FilmPageComponents { Overview, Details, Reviews}
-
-function FilmPage({title, releaseDate, genre, isGuest, filmPageComponent: filmPageComponent}: FilmInfo &
-  { isGuest: boolean } & { filmPageComponent: FilmPageComponents }): JSX.Element {
-  let component: JSX.Element;
-  switch (filmPageComponent) {
-    case FilmPageComponents.Details:
-      component = <DetailsComponent/>;
-      break;
-    case FilmPageComponents.Overview:
-      component = <OverviewComponent/>;
-      break;
-    case FilmPageComponents.Reviews:
-      component = <ReviewsComponent/>;
-      break;
-  }
-
+function FilmPage({title, releaseDate, genre, authStatus}: FilmInfo &
+  { authStatus: AuthorizationStatuses }): JSX.Element {
   return (
     <>
       <section className="film-card film-card--full">
@@ -37,7 +21,7 @@ function FilmPage({title, releaseDate, genre, isGuest, filmPageComponent: filmPa
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header film-card__head">
             <WTWLogo isLight={false}/>
-            <UserBlock isGuest={isGuest}/>
+            <UserBlock authStatus={authStatus}/>
           </header>
 
           <div className="film-card__wrap">
@@ -51,7 +35,7 @@ function FilmPage({title, releaseDate, genre, isGuest, filmPageComponent: filmPa
               <img src="img/the-grand-budapest-hotel-poster.jpg" alt={title} width="218" height="327"/>
             </div>
 
-            {component}
+            {<OverviewComponent/>}
           </div>
         </div>
       </section>
