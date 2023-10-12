@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import App from './pages/App.tsx';
+import {FilmInfo} from './Types/FilmInfo.ts';
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById('root') as HTMLElement
 );
+
+const promoFilmCardProps: FilmInfo = {
+  title: 'The Grand Budapest Hotel',
+  genre: 'Drama',
+  releaseDate: '2014'
+};
 
 root.render(
   <React.StrictMode>
-    <h1>Hello, World!</h1>
+    <App {...promoFilmCardProps} />
   </React.StrictMode>
 );
