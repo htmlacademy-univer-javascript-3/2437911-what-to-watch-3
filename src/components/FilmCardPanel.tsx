@@ -1,0 +1,40 @@
+import {JSX} from 'react';
+import {FilmInfo} from '../Types/FilmInfo.ts';
+
+function FilmCardPanel({title, genre, releaseDate, reviewButton}: FilmInfo & { reviewButton: boolean }): JSX.Element {
+  let review: JSX.Element;
+  if (reviewButton) {
+    review = <a href="add-review.html" className="btn film-card__button">Add review</a>;
+  } else {
+    review = <></>;
+  }
+
+  return (
+    <div className="film-card__desc">
+      <h2 className="film-card__title">{title}</h2>
+      <p className="film-card__meta">
+        <span className="film-card__genre">{genre}</span>
+        <span className="film-card__year">{releaseDate}</span>
+      </p>
+
+      <div className="film-card__buttons">
+        <button className="btn btn--play film-card__button" type="button">
+          <svg viewBox="0 0 19 19" width="19" height="19">
+            <use xlinkHref="#play-s"></use>
+          </svg>
+          <span>Play</span>
+        </button>
+        <button className="btn btn--list film-card__button" type="button">
+          <svg viewBox="0 0 19 20" width="19" height="20">
+            <use xlinkHref="#add"></use>
+          </svg>
+          <span>My list</span>
+          <span className="film-card__count">9</span>
+        </button>
+        {review}
+      </div>
+    </div>
+  );
+}
+
+export default FilmCardPanel;

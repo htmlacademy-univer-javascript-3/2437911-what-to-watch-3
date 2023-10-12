@@ -1,0 +1,11 @@
+import {JSX} from 'react';
+
+function Copyright(): JSX.Element {
+  return (
+    <div className="copyright">
+      <p>© 2019 What to watch Ltd.</p>
+    </div>
+  );
+}
+
+export default Copyright;
