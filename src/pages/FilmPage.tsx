@@ -6,7 +6,8 @@ import {FilmInfo} from '../Types/FilmInfo.ts';
 import WTWLogo from '../components/WTWLogo.tsx';
 import UserBlock from '../components/UserBlock.tsx';
 import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
-import OverviewComponent from '../components/FilmPage/OverviewComponent.tsx';
+import {NavLink, Outlet} from 'react-router-dom';
+import {AppRoutes} from '../consts/AppRoutes.ts';
 
 function FilmPage({title, releaseDate, genre, authStatus}: FilmInfo &
   { authStatus: AuthorizationStatuses }): JSX.Element {
@@ -35,7 +36,29 @@ function FilmPage({title, releaseDate, genre, authStatus}: FilmInfo &
               <img src="img/the-grand-budapest-hotel-poster.jpg" alt={title} width="218" height="327"/>
             </div>
 
-            {<OverviewComponent/>}
+            <div className="film-card__desc">
+              <nav className="film-nav film-card__nav">
+                <ul className="film-nav__list">
+                  <li className="film-nav__item film-nav__item--active">
+                    <NavLink to={AppRoutes.Film} className='film-nav__link'>
+                      Overview
+                    </NavLink>
+                  </li>
+                  <li className="film-nav__item">
+                    <NavLink to={`${AppRoutes.Film}/details`} className="film-nav__link">
+                      Details
+                    </NavLink>
+                  </li>
+                  <li className="film-nav__item">
+                    <NavLink to={`${AppRoutes.Film}/reviews`} className="film-nav__link">
+                      Reviews
+                    </NavLink>
+                  </li>
+                </ul>
+              </nav>
+
+              {<Outlet/>}
+            </div>
           </div>
         </div>
       </section>

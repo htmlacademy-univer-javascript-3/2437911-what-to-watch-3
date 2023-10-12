@@ -7,8 +7,8 @@ import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 
 function PromoFilmCard({title, genre, releaseDate, authStatus}: FilmInfo &
   { authStatus: AuthorizationStatuses }): JSX.Element {
-  let backGroundImage: JSX.Element;
-  let filmCardWrap: JSX.Element;
+  let backGroundImage: JSX.Element = <img src="img/bg-header.jpg"/>;
+  let filmCardWrap: JSX.Element = <> </>;
 
   if (authStatus === AuthorizationStatuses.AUTH) {
     backGroundImage = <img src="img/bg-the-grand-budapest-hotel.jpg" alt={title}/>;
@@ -23,9 +23,6 @@ function PromoFilmCard({title, genre, releaseDate, authStatus}: FilmInfo &
         </div>
       </div>
     );
-  } else {
-    backGroundImage = <img src="img/bg-header.jpg"/>;
-    filmCardWrap = <> </>;
   }
 
   return (

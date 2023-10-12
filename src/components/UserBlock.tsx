@@ -1,5 +1,7 @@
 import {JSX} from 'react';
 import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
+import {Link} from 'react-router-dom';
+import {AppRoutes} from '../consts/AppRoutes.ts';
 
 function UserBlock({authStatus}: { authStatus: AuthorizationStatuses }): JSX.Element {
   if (authStatus === AuthorizationStatuses.AUTH) {
@@ -18,7 +20,7 @@ function UserBlock({authStatus}: { authStatus: AuthorizationStatuses }): JSX.Ele
   } else {
     return (
       <div className="user-block">
-        <a href="sign-in.html" className="user-block__link">Sign in</a>
+        <Link to={AppRoutes.SignIn} className="user-block__link">Sign In</Link>
       </div>
     );
 
