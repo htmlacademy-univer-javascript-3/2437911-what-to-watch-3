@@ -11,7 +11,7 @@ function SignInPage({message}: { message?: string }): JSX.Element {
       </div>
     );
   } else {
-    messageDiv = <></>;
+    messageDiv = <> </>;
   }
 
   return (

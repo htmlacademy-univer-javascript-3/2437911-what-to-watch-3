@@ -10,7 +10,7 @@ function PromoFilmCard({title, genre, releaseDate, isGuest}: FilmInfo & { isGues
 
   if (isGuest) {
     backGroundImage = <img src="img/bg-header.jpg"/>;
-    filmCardWrap = <></>;
+    filmCardWrap = <> </>;
   } else {
     backGroundImage = <img src="img/bg-the-grand-budapest-hotel.jpg" alt={title}/>;
     filmCardWrap = (

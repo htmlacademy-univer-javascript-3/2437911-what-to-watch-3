@@ -6,7 +6,7 @@ function FilmCardPanel({title, genre, releaseDate, reviewButton}: FilmInfo & { r
   if (reviewButton) {
     review = <a href="add-review.html" className="btn film-card__button">Add review</a>;
   } else {
-    review = <></>;
+    review = <> </>;
   }
 
   return (

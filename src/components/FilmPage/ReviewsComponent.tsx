@@ -22,8 +22,8 @@ function ReviewsComponent(): JSX.Element {
           <div className="review">
             <blockquote className="review__quote">
               <p className="review__text">Discerning travellers and Wes Anderson fans will luxuriate in
-                                the glorious Mittel-European kitsch of one of the director's funniest and most
-                                exquisitely designed films in years.
+                the glorious Mittel-European kitsch of one of the director&#39;s funniest and most
+                exquisitely designed films in years.
               </p>
 
               <footer className="review__details">
@@ -37,10 +37,10 @@ function ReviewsComponent(): JSX.Element {
 
           <div className="review">
             <blockquote className="review__quote">
-              <p className="review__text">Anderson's films are too precious for some, but for those of us
-                                willing to lose ourselves in them, they're a delight. "The Grand Budapest Hotel" is no
-                                different, except that he has added a hint of gravitas to the mix, improving the
-                                recipe.
+              <p className="review__text">Anderson&#39;s films are too precious for some, but for those of us
+                willing to lose ourselves in them, they&#39;re a delight. &#39;The Grand Budapest Hotel&#39; is no
+                different, except that he has added a hint of gravitas to the mix, improving the
+                recipe.
               </p>
 
               <footer className="review__details">
@@ -54,8 +54,8 @@ function ReviewsComponent(): JSX.Element {
 
           <div className="review">
             <blockquote className="review__quote">
-              <p className="review__text">I didn't find it amusing, and while I can appreciate the
-                                creativity, it's an hour and 40 minutes I wish I could take back.
+              <p className="review__text">I didn&#39;t find it amusing, and while I can appreciate the
+                creativity, it&#39;s an hour and 40 minutes I wish I could take back.
               </p>
 
               <footer className="review__details">
@@ -71,7 +71,7 @@ function ReviewsComponent(): JSX.Element {
           <div className="review">
             <blockquote className="review__quote">
               <p className="review__text">The mannered, madcap proceedings are often delightful,
-                                occasionally silly, and here and there, gruesome and/or heartbreaking.
+                occasionally silly, and here and there, gruesome and/or heartbreaking.
               </p>
 
               <footer className="review__details">
@@ -86,7 +86,7 @@ function ReviewsComponent(): JSX.Element {
           <div className="review">
             <blockquote className="review__quote">
               <p className="review__text">It is certainly a magical and childlike way of storytelling,
-                                even if the content is a little more adult.
+                even if the content is a little more adult.
               </p>
 
               <footer className="review__details">
@@ -101,7 +101,7 @@ function ReviewsComponent(): JSX.Element {
           <div className="review">
             <blockquote className="review__quote">
               <p className="review__text">It is certainly a magical and childlike way of storytelling,
-                                even if the content is a little more adult.
+                even if the content is a little more adult.
               </p>
 
               <footer className="review__details">
