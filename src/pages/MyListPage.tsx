@@ -3,6 +3,7 @@ import Footer from '../components/Footer.tsx';
 import CatalogFilmCard from '../components/CatalogFilmCard.tsx';
 import WTWLogo from '../components/WTWLogo.tsx';
 import UserBlock from '../components/UserBlock.tsx';
+import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 
 function MyListPage(): JSX.Element {
   return (
@@ -11,7 +12,7 @@ function MyListPage(): JSX.Element {
         <WTWLogo isLight={false}/>
         <h1 className="page-title user-page__title">My List <span className="user-page__film-count">9</span>
         </h1>;
-        <UserBlock isGuest={false}/>
+        <UserBlock authStatus={AuthorizationStatuses.AUTH}/>
       </header>
 
       <section className="catalog">

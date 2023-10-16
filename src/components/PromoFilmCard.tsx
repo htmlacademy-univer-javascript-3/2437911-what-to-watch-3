@@ -3,15 +3,14 @@ import FilmCardPanel from './FilmCardPanel.tsx';
 import {FilmInfo} from '../Types/FilmInfo.ts';
 import WTWLogo from './WTWLogo.tsx';
 import UserBlock from './UserBlock.tsx';
+import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 
-function PromoFilmCard({title, genre, releaseDate, isGuest}: FilmInfo & { isGuest: boolean }): JSX.Element {
-  let backGroundImage: JSX.Element;
-  let filmCardWrap: JSX.Element;
+function PromoFilmCard({title, genre, releaseDate, authStatus}: FilmInfo &
+  { authStatus: AuthorizationStatuses }): JSX.Element {
+  let backGroundImage: JSX.Element = <img src="img/bg-header.jpg"/>;
+  let filmCardWrap: JSX.Element = <> </>;
 
-  if (isGuest) {
-    backGroundImage = <img src="img/bg-header.jpg"/>;
-    filmCardWrap = <> </>;
-  } else {
+  if (authStatus === AuthorizationStatuses.AUTH) {
     backGroundImage = <img src="img/bg-the-grand-budapest-hotel.jpg" alt={title}/>;
     filmCardWrap = (
       <div className="film-card__wrap">
@@ -36,7 +35,7 @@ function PromoFilmCard({title, genre, releaseDate, isGuest}: FilmInfo & { isGues
 
       <header className="page-header film-card__head">
         <WTWLogo isLight={false}/>
-        <UserBlock isGuest={isGuest}/>
+        <UserBlock authStatus={authStatus}/>
       </header>
 
       {filmCardWrap}

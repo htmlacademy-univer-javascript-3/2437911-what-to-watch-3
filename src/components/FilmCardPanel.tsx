@@ -1,12 +1,12 @@
 import {JSX} from 'react';
 import {FilmInfo} from '../Types/FilmInfo.ts';
+import {Link} from 'react-router-dom';
+import {AppRoutes} from '../consts/AppRoutes.ts';
 
 function FilmCardPanel({title, genre, releaseDate, reviewButton}: FilmInfo & { reviewButton: boolean }): JSX.Element {
-  let review: JSX.Element;
+  let review: JSX.Element = <> </>;
   if (reviewButton) {
-    review = <a href="add-review.html" className="btn film-card__button">Add review</a>;
-  } else {
-    review = <> </>;
+    review = <Link to={AppRoutes.AddReview} className="btn film-card__button">Add review</Link>;
   }
 
   return (

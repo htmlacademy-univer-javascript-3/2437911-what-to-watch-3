@@ -3,15 +3,13 @@ import Footer from '../components/Footer.tsx';
 import WTWLogo from '../components/WTWLogo.tsx';
 
 function SignInPage({message}: { message?: string }): JSX.Element {
-  let messageDiv: JSX.Element;
+  let messageDiv: JSX.Element = <> </>;
   if (message) {
     messageDiv = (
       <div className="sign-in__message">
         <p>{message}</p>
       </div>
     );
-  } else {
-    messageDiv = <> </>;
   }
 
   return (

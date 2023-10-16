@@ -2,6 +2,9 @@ import {JSX} from 'react';
 import WTWLogo from '../components/WTWLogo.tsx';
 import UserBlock from '../components/UserBlock.tsx';
 import {FilmInfo} from '../Types/FilmInfo.ts';
+import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
+import {Link} from 'react-router-dom';
+import {AppRoutes} from '../consts/AppRoutes.ts';
 
 const MINRATING = 1;
 const MAXRATING = 10;
@@ -23,7 +26,7 @@ function ReviewPage({title}: FilmInfo): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="film-page.html" className="breadcrumbs__link">{title}</a>
+                <Link to={AppRoutes.Film} className="breadcrumbs__link">{title}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
@@ -31,7 +34,7 @@ function ReviewPage({title}: FilmInfo): JSX.Element {
             </ul>
           </nav>
 
-          <UserBlock isGuest={false}/>
+          <UserBlock authStatus={AuthorizationStatuses.AUTH}/>
         </header>
 
         <div className="film-card__poster film-card__poster--small">
