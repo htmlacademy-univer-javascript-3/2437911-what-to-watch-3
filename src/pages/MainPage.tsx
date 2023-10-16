@@ -5,10 +5,12 @@ import CatalogFilmCard from '../components/CatalogFilmCard.tsx';
 import {FilmInfo} from '../Types/FilmInfo.ts';
 import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 
-function MainPage(promoFilmCardProps: FilmInfo & { authStatus: AuthorizationStatuses }): JSX.Element {
+type MainPageProps = FilmInfo & { authStatus: AuthorizationStatuses };
+
+function MainPage(promoFilmCardProps: MainPageProps): JSX.Element {
   return (
     <>
-      <PromoFilmCard {...promoFilmCardProps} authStatus={promoFilmCardProps.authStatus}/>
+      <PromoFilmCard {...promoFilmCardProps}/>
 
       <div className="page-content">
         <section className="catalog">

@@ -5,30 +5,17 @@ import WTWLogo from './WTWLogo.tsx';
 import UserBlock from './UserBlock.tsx';
 import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 
-function PromoFilmCard({title, genre, releaseDate, authStatus}: FilmInfo &
-  { authStatus: AuthorizationStatuses }): JSX.Element {
-  let backGroundImage: JSX.Element = <img src="img/bg-header.jpg"/>;
-  let filmCardWrap: JSX.Element = <> </>;
+type PromoFIlmCardProps = FilmInfo & { authStatus: AuthorizationStatuses };
 
-  if (authStatus === AuthorizationStatuses.AUTH) {
-    backGroundImage = <img src="img/bg-the-grand-budapest-hotel.jpg" alt={title}/>;
-    filmCardWrap = (
-      <div className="film-card__wrap">
-        <div className="film-card__info">
-          <div className="film-card__poster">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt={title} width="218" height="327"/>
-          </div>
-
-          <FilmCardPanel title={title} releaseDate={releaseDate} genre={genre} reviewButton={false}/>
-        </div>
-      </div>
-    );
-  }
+function PromoFilmCard({title, genre, releaseDate, authStatus}: PromoFIlmCardProps): JSX.Element {
+  const isAuth = authStatus === AuthorizationStatuses.AUTH;
 
   return (
     <section className="film-card">
       <div className="film-card__bg">
-        {backGroundImage}
+        {isAuth
+          ? <img src="img/bg-the-grand-budapest-hotel.jpg" alt={title}/>
+          : <img src="img/bg-header.jpg"/>}
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -38,7 +25,17 @@ function PromoFilmCard({title, genre, releaseDate, authStatus}: FilmInfo &
         <UserBlock authStatus={authStatus}/>
       </header>
 
-      {filmCardWrap}
+      {isAuth && (
+        <div className="film-card__wrap">
+          <div className="film-card__info">
+            <div className="film-card__poster">
+              <img src="img/the-grand-budapest-hotel-poster.jpg" alt={title} width="218" height="327"/>
+            </div>
+
+            <FilmCardPanel title={title} releaseDate={releaseDate} genre={genre} hasReviewButton={false}/>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

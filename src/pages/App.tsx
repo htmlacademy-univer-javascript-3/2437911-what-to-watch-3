@@ -15,7 +15,9 @@ import ReviewsComponent from '../components/FilmPage/ReviewsComponent.tsx';
 import OverviewComponent from '../components/FilmPage/OverviewComponent.tsx';
 import DetailsComponent from '../components/FilmPage/DetailsComponent.tsx';
 
-function App(promoFilmCardProps: FilmInfo): JSX.Element {
+type AppProps = FilmInfo;
+
+function App(promoFilmCardProps: AppProps): JSX.Element {
   const authorizationStatus = AuthorizationStatuses.NO_AUTH;
   return (
     <BrowserRouter>

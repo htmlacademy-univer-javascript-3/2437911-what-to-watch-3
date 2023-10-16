@@ -9,8 +9,29 @@ import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 import {NavLink, Outlet} from 'react-router-dom';
 import {AppRoutes} from '../consts/AppRoutes.ts';
 
-function FilmPage({title, releaseDate, genre, authStatus}: FilmInfo &
-  { authStatus: AuthorizationStatuses }): JSX.Element {
+type FilmPageProps = FilmInfo & { authStatus: AuthorizationStatuses };
+
+type FilmPageLinksProps = {
+  title: string;
+  to: string;
+}
+
+function FilmPage({title, releaseDate, genre, authStatus}: FilmPageProps): JSX.Element {
+  const links: FilmPageLinksProps[] = [
+    {
+      title: 'Overview',
+      to: AppRoutes.Film
+    },
+    {
+      title: 'Details',
+      to: `${AppRoutes.Film}/details`
+    },
+    {
+      title: 'Reviews',
+      to: `${AppRoutes.Film}/reviews`
+    }
+  ];
+
   return (
     <>
       <section className="film-card film-card--full">
@@ -26,7 +47,7 @@ function FilmPage({title, releaseDate, genre, authStatus}: FilmInfo &
           </header>
 
           <div className="film-card__wrap">
-            <FilmCardPanel title={title} releaseDate={releaseDate} genre={genre} reviewButton/>
+            <FilmCardPanel title={title} releaseDate={releaseDate} genre={genre} hasReviewButton/>
           </div>
         </div>
 
@@ -39,21 +60,15 @@ function FilmPage({title, releaseDate, genre, authStatus}: FilmInfo &
             <div className="film-card__desc">
               <nav className="film-nav film-card__nav">
                 <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <NavLink to={AppRoutes.Film} className='film-nav__link'>
-                      Overview
-                    </NavLink>
-                  </li>
-                  <li className="film-nav__item">
-                    <NavLink to={`${AppRoutes.Film}/details`} className="film-nav__link">
-                      Details
-                    </NavLink>
-                  </li>
-                  <li className="film-nav__item">
-                    <NavLink to={`${AppRoutes.Film}/reviews`} className="film-nav__link">
-                      Reviews
-                    </NavLink>
-                  </li>
+                  {
+                    links.map((link) => (
+                      <li className="film-nav__item film-nav__item--active" key={link.title}>
+                        <NavLink to={link.to} className='film-nav__link'>
+                          {link.title}
+                        </NavLink>
+                      </li>
+                    ))
+                  }
                 </ul>
               </nav>
 

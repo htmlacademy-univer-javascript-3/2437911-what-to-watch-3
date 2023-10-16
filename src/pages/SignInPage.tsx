@@ -3,15 +3,6 @@ import Footer from '../components/Footer.tsx';
 import WTWLogo from '../components/WTWLogo.tsx';
 
 function SignInPage({message}: { message?: string }): JSX.Element {
-  let messageDiv: JSX.Element = <> </>;
-  if (message) {
-    messageDiv = (
-      <div className="sign-in__message">
-        <p>{message}</p>
-      </div>
-    );
-  }
-
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -21,7 +12,12 @@ function SignInPage({message}: { message?: string }): JSX.Element {
 
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form">
-          {messageDiv}
+          {message && (
+            <div className="sign-in__message">
+              <p>{message}</p>
+            </div>
+          )}
+
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email"

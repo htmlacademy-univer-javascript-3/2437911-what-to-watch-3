@@ -3,12 +3,9 @@ import {FilmInfo} from '../Types/FilmInfo.ts';
 import {Link} from 'react-router-dom';
 import {AppRoutes} from '../consts/AppRoutes.ts';
 
-function FilmCardPanel({title, genre, releaseDate, reviewButton}: FilmInfo & { reviewButton: boolean }): JSX.Element {
-  let review: JSX.Element = <> </>;
-  if (reviewButton) {
-    review = <Link to={AppRoutes.AddReview} className="btn film-card__button">Add review</Link>;
-  }
+type FilmCardPanelProps = FilmInfo & { hasReviewButton: boolean };
 
+function FilmCardPanel({title, genre, releaseDate, hasReviewButton}: FilmCardPanelProps): JSX.Element {
   return (
     <div className="film-card__desc">
       <h2 className="film-card__title">{title}</h2>
@@ -31,7 +28,9 @@ function FilmCardPanel({title, genre, releaseDate, reviewButton}: FilmInfo & { r
           <span>My list</span>
           <span className="film-card__count">9</span>
         </button>
-        {review}
+        {hasReviewButton && (
+          <Link to={AppRoutes.AddReview} className="btn film-card__button">Add review</Link>
+        )}
       </div>
     </div>
   );
