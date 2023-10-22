@@ -7,15 +7,28 @@ type FilmListProps = {
 };
 
 function FilmsList({films}: FilmListProps): JSX.Element {
-  const [, setId] = useState<number | undefined>();
+  const [selectFilmId, setSelectFilmId] = useState<number | undefined>();
+  let selectedId: number | undefined = undefined;
 
   return (
     <div className="catalog__films-list">
       {
         films.map((film) => (
           <CatalogFilmCard id={film.id} title={film.title} listImage={film.listImage} key={film.id}
-            onMouseEnter={() => setId(film.id)}
-            onMouseLeave={() => setId(undefined)}
+            videoSrc={film.videoSrc}
+            isPlaying={film.id === selectFilmId}
+            onMouseEnter={() => {
+              selectedId = film.id;
+              setTimeout(() => {
+                if (selectedId === film.id) {
+                  setSelectFilmId(film.id);
+                }
+              }, 1000);
+            }}
+            onMouseLeave={() => {
+              selectedId = undefined;
+              setSelectFilmId(undefined);
+            }}
           />
         ))
       }
