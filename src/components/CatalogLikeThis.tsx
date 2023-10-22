@@ -1,4 +1,5 @@
 import {JSX} from 'react';
+import {imageDirectory} from '../consts/SrcPath.ts';
 
 function CatalogLikeThis(): JSX.Element {
   return (
@@ -8,7 +9,7 @@ function CatalogLikeThis(): JSX.Element {
       <div className="catalog__films-list">
         <article className="small-film-card catalog__films-card">
           <div className="small-film-card__image">
-            <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+            <img src={`${imageDirectory}/fantastic-beasts-the-crimes-of-grindelwald.jpg`}
               alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"
             />
           </div>
@@ -21,7 +22,7 @@ function CatalogLikeThis(): JSX.Element {
 
         <article className="small-film-card catalog__films-card">
           <div className="small-film-card__image">
-            <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175"/>
+            <img src={`${imageDirectory}/bohemian-rhapsody.jpg`} alt="Bohemian Rhapsody" width="280" height="175"/>
           </div>
           <h3 className="small-film-card__title">
             <a className="small-film-card__link" href="film-page.html">Bohemian Rhapsody</a>
@@ -30,7 +31,7 @@ function CatalogLikeThis(): JSX.Element {
 
         <article className="small-film-card catalog__films-card">
           <div className="small-film-card__image">
-            <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175"/>
+            <img src={`${imageDirectory}/macbeth.jpg`} alt="Macbeth" width="280" height="175"/>
           </div>
           <h3 className="small-film-card__title">
             <a className="small-film-card__link" href="film-page.html">Macbeth</a>
@@ -39,7 +40,7 @@ function CatalogLikeThis(): JSX.Element {
 
         <article className="small-film-card catalog__films-card">
           <div className="small-film-card__image">
-            <img src="img/aviator.jpg" alt="Aviator" width="280" height="175"/>
+            <img src={`${imageDirectory}/aviator.jpg`} alt="Aviator" width="280" height="175"/>
           </div>
           <h3 className="small-film-card__title">
             <a className="small-film-card__link" href="film-page.html">Aviator</a>

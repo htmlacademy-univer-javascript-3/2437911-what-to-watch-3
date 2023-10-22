@@ -1,13 +1,14 @@
 import {JSX} from 'react';
-import {FilmInfo} from '../Types/FilmInfo.ts';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {AppRoutes} from '../consts/AppRoutes.ts';
+import {FilmShortData} from '../types/FilmData.ts';
 
-function FilmCardPanel({title, genre, releaseDate, reviewButton}: FilmInfo & { reviewButton: boolean }): JSX.Element {
-  let review: JSX.Element = <> </>;
-  if (reviewButton) {
-    review = <Link to={AppRoutes.AddReview} className="btn film-card__button">Add review</Link>;
-  }
+type FilmCardPanelProps = FilmShortData & {
+  hasReviewButton: boolean;
+};
+
+function FilmCardPanel({id, title, genre, releaseDate, hasReviewButton}: FilmCardPanelProps): JSX.Element {
+  const navigate = useNavigate();
 
   return (
     <div className="film-card__desc">
@@ -18,20 +19,26 @@ function FilmCardPanel({title, genre, releaseDate, reviewButton}: FilmInfo & { r
       </p>
 
       <div className="film-card__buttons">
-        <button className="btn btn--play film-card__button" type="button">
+        <button className="btn btn--play film-card__button" type="button"
+          onClick={() => navigate(AppRoutes.Player(id))}
+        >
           <svg viewBox="0 0 19 19" width="19" height="19">
             <use xlinkHref="#play-s"></use>
           </svg>
           <span>Play</span>
         </button>
-        <button className="btn btn--list film-card__button" type="button">
+        <button className="btn btn--play film-card__button" type="button"
+          onClick={() => navigate(AppRoutes.MyList)}
+        >
           <svg viewBox="0 0 19 20" width="19" height="20">
             <use xlinkHref="#add"></use>
           </svg>
           <span>My list</span>
           <span className="film-card__count">9</span>
         </button>
-        {review}
+        {hasReviewButton && (
+          <Link to={AppRoutes.AddReview(id)} className="btn film-card__button">Add review</Link>
+        )}
       </div>
     </div>
   );
