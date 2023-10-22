@@ -1,9 +1,17 @@
 import {JSX} from 'react';
+import {Helmet} from 'react-helmet-async';
 
-function PlayerPage(): JSX.Element {
+type PlayerProps = {
+  videoSrc: string;
+  posterSrc: string;
+  title: string;
+}
+
+function PlayerPage({videoSrc, posterSrc, title}: PlayerProps): JSX.Element {
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <Helmet><title>{title} player</title></Helmet>
+      <video src={`video/${videoSrc}`} className="player__video" poster={`img/${posterSrc}`}></video>
 
       <button type="button" className="player__exit">Exit</button>
 

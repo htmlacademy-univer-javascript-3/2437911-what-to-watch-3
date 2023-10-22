@@ -1,10 +1,13 @@
 import {JSX} from 'react';
 import Footer from '../components/Footer.tsx';
 import WTWLogo from '../components/WTWLogo.tsx';
+import {Helmet} from 'react-helmet-async';
 
 function SignInPage({message}: { message?: string }): JSX.Element {
   return (
     <div className="user-page">
+      <Helmet><title>WTW sign in</title></Helmet>
+
       <header className="page-header user-page__head">
         <WTWLogo isLight={false}/>
         <h1 className="page-title user-page__title">Sign in</h1>

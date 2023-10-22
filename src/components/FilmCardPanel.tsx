@@ -1,11 +1,15 @@
 import {JSX} from 'react';
-import {FilmInfo} from '../Types/FilmInfo.ts';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {AppRoutes} from '../consts/AppRoutes.ts';
+import {FilmShortData} from '../types/FilmData.ts';
 
-type FilmCardPanelProps = FilmInfo & { hasReviewButton: boolean };
+type FilmCardPanelProps = FilmShortData & {
+  hasReviewButton: boolean;
+};
 
-function FilmCardPanel({title, genre, releaseDate, hasReviewButton}: FilmCardPanelProps): JSX.Element {
+function FilmCardPanel({id, title, genre, releaseDate, hasReviewButton}: FilmCardPanelProps): JSX.Element {
+  const navigate = useNavigate();
+
   return (
     <div className="film-card__desc">
       <h2 className="film-card__title">{title}</h2>
@@ -15,13 +19,17 @@ function FilmCardPanel({title, genre, releaseDate, hasReviewButton}: FilmCardPan
       </p>
 
       <div className="film-card__buttons">
-        <button className="btn btn--play film-card__button" type="button">
+        <button className="btn btn--play film-card__button" type="button"
+          onClick={() => navigate(AppRoutes.Player(id))}
+        >
           <svg viewBox="0 0 19 19" width="19" height="19">
             <use xlinkHref="#play-s"></use>
           </svg>
           <span>Play</span>
         </button>
-        <button className="btn btn--list film-card__button" type="button">
+        <button className="btn btn--play film-card__button" type="button"
+          onClick={() => navigate(AppRoutes.MyList)}
+        >
           <svg viewBox="0 0 19 20" width="19" height="20">
             <use xlinkHref="#add"></use>
           </svg>
@@ -29,7 +37,7 @@ function FilmCardPanel({title, genre, releaseDate, hasReviewButton}: FilmCardPan
           <span className="film-card__count">9</span>
         </button>
         {hasReviewButton && (
-          <Link to={AppRoutes.AddReview} className="btn film-card__button">Add review</Link>
+          <Link to={AppRoutes.AddReview(id)} className="btn film-card__button">Add review</Link>
         )}
       </div>
     </div>
