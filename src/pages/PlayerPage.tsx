@@ -1,5 +1,7 @@
-import {JSX} from 'react';
+import {JSX, useState} from 'react';
 import {Helmet} from 'react-helmet-async';
+import {useNavigate} from 'react-router-dom';
+import VideoPlayer from '../components/VideoPlayer.tsx';
 
 type PlayerProps = {
   videoSrc: string;
@@ -8,12 +10,17 @@ type PlayerProps = {
 }
 
 function PlayerPage({videoSrc, posterSrc, title}: PlayerProps): JSX.Element {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const navigate = useNavigate();
+
   return (
     <div className="player">
       <Helmet><title>{title} player</title></Helmet>
-      <video src={`video/${videoSrc}`} className="player__video" poster={`img/${posterSrc}`}></video>
+      <VideoPlayer videoSrc={videoSrc} posterSrc={posterSrc}
+        className='player__video' isMuted={false} isPlaying={isPlaying}
+      />
 
-      <button type="button" className="player__exit">Exit</button>
+      <button type="button" className="player__exit" onClick={() => navigate(-1)}>Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -25,12 +32,25 @@ function PlayerPage({videoSrc, posterSrc, title}: PlayerProps): JSX.Element {
         </div>
 
         <div className="player__controls-row">
-          <button type="button" className="player__play">
-            <svg viewBox="0 0 19 19" width="19" height="19">
-              <use xlinkHref="#play-s"></use>
-            </svg>
-            <span>Play</span>
-          </button>
+
+          {isPlaying
+            ? (
+              <button type="button" className="player__play" onClick={() => setIsPlaying(false)}>
+                <svg viewBox="0 0 14 21" width="14" height="21">
+                  <use xlinkHref="#pause"></use>
+                </svg>
+                <span>Pause</span>
+              </button>
+            )
+            : (
+              <button type="button" className="player__play" onClick={() => setIsPlaying(true)}>
+                <svg viewBox="0 0 19 19" width="19" height="19">
+                  <use xlinkHref="#play-s"></use>
+                </svg>
+                <span>Play</span>
+              </button>
+            )}
+
           <div className="player__name">Transpotting</div>
 
           <button type="button" className="player__full-screen">
