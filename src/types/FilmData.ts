@@ -21,7 +21,7 @@ export type FilmShortData = {
 }
 
 export type FilmDetails = {
-  directors: Person[];
+  director: Person;
   starring: Person[];
   genre: Genres;
   releaseDate: string;
@@ -32,7 +32,7 @@ export type FilmOverview = {
   ratingScore: number;
   ratingsCount: number;
   overview: string;
-  directors: Person[];
+  director: Person;
   starring: Person[];
 }
 export type FilmReviews = {
