@@ -1,5 +1,5 @@
 import {JSX} from 'react';
-import {Person} from '../../types/Person.ts';
+import {Person} from '../../types/person.ts';
 import {Genres} from '../../consts/Genres.ts';
 
 export type DetailsProps = {

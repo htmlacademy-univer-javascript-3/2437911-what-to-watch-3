@@ -6,13 +6,13 @@ import FilmCardPanel from '../components/FilmCardPanel.tsx';
 import WTWLogo from '../components/WTWLogo.tsx';
 import UserBlock from '../components/UserBlock.tsx';
 import {imageDirectory} from '../consts/SrcPath.ts';
-import {FilmData} from '../types/FilmData.ts';
+import {FilmTypes} from '../types/filmTypes.ts';
 import Tabs from '../components/Tabs.tsx';
 import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 
 type FilmPageProps = {
-  filmInfo: FilmData;
-  filmsLikeThis: FilmData[];
+  filmInfo: FilmTypes;
+  filmsLikeThis: FilmTypes[];
   authStatus: AuthorizationStatuses;
 };
 

@@ -47,11 +47,12 @@ function VideoPlayer({
       return;
     }
 
-    videoRef.current.pause();
+    videoRef.current.load();
   }, [isPlaying, isLoaded]);
 
   return (
-    <video poster={posterSrc && `${imageDirectory}/${posterSrc}`} className={className} ref={videoRef}
+    <video poster={posterSrc && `${imageDirectory}/${posterSrc}`}
+      className={className} ref={videoRef}
       width={width} height={height} muted={isMuted}
     >
       <source src={`video/${videoSrc}`} type='video/mp4'/>

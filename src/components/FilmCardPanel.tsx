@@ -1,7 +1,7 @@
 import {JSX} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {AppRoutes} from '../consts/AppRoutes.ts';
-import {FilmShortData} from '../types/FilmData.ts';
+import {FilmShortData} from '../types/filmTypes.ts';
 
 type FilmCardPanelProps = FilmShortData & {
   hasReviewButton: boolean;

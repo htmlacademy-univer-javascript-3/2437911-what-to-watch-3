@@ -1,7 +1,7 @@
-import {FilmData} from '../types/FilmData.ts';
+import {FilmTypes} from '../types/filmTypes.ts';
 import {Genres} from '../consts/Genres.ts';
 
-export const films: FilmData[] = [
+export const films: FilmTypes[] = [
   {
     id: 1,
     listImage: 'bg-the-grand-budapest-hotel.jpg',

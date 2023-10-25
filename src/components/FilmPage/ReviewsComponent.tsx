@@ -1,5 +1,5 @@
 import {JSX} from 'react';
-import {Review} from '../../types/Review.ts';
+import {Review} from '../../types/review.ts';
 
 export type ReviewsProps = {
   reviews: Review[];

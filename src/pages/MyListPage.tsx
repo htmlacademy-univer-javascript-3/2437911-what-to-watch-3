@@ -3,12 +3,12 @@ import Footer from '../components/Footer.tsx';
 import WTWLogo from '../components/WTWLogo.tsx';
 import UserBlock from '../components/UserBlock.tsx';
 import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
-import {FilmData} from '../types/FilmData.ts';
+import {FilmTypes} from '../types/filmTypes.ts';
 import FilmsList from '../components/FilmsList.tsx';
 import {Helmet} from 'react-helmet-async';
 
 type MyListProps = {
-  films: FilmData[];
+  films: FilmTypes[];
 }
 
 function MyListPage({films}: MyListProps): JSX.Element {

@@ -1,9 +1,9 @@
 import {JSX} from 'react';
 import FilmsList from './FilmsList.tsx';
-import {FilmData} from '../types/FilmData.ts';
+import {FilmTypes} from '../types/filmTypes.ts';
 
 type CatalogLikeThisProps = {
-  films: FilmData[];
+  films: FilmTypes[];
 }
 
 function CatalogLikeThis({films}: CatalogLikeThisProps): JSX.Element {

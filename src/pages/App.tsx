@@ -1,6 +1,6 @@
 import {JSX, useState} from 'react';
 import MainPage from './MainPage.tsx';
-import {FilmData} from '../types/FilmData.ts';
+import {FilmTypes} from '../types/filmTypes.ts';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import SignInPage from './SignInPage.tsx';
 import MyListPage from './MyListPage.tsx';
@@ -13,10 +13,14 @@ import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 import {AppRoutes} from '../consts/AppRoutes.ts';
 import {HelmetProvider} from 'react-helmet-async';
 import ScrollToTop from '../functions/ScrollToTop.ts';
+import {Genres} from '../consts/Genres.ts';
 
-type AppProps = { films: FilmData[] };
+type AppProps = {
+  films: FilmTypes[];
+  genres: Genres[];
+};
 
-function App({films}: AppProps): JSX.Element {
+function App({films, genres}: AppProps): JSX.Element {
   const authorizationStatus = AuthorizationStatuses.AUTH;
 
   const [filmId,] = useState(1);
@@ -30,7 +34,7 @@ function App({films}: AppProps): JSX.Element {
         <Routes>
           <Route path={AppRoutes.Main}
             element={
-              <MainPage films={films} promoFilm={filmInfo} authStatus={authorizationStatus}/>
+              <MainPage films={films} genres={genres} promoFilm={filmInfo} authStatus={authorizationStatus}/>
             }
           />
           <Route path={AppRoutes.SignIn} element={<SignInPage/>}/>

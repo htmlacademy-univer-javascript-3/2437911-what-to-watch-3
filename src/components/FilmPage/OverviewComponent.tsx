@@ -1,5 +1,5 @@
 import {JSX} from 'react';
-import {Person} from '../../types/Person.ts';
+import {Person} from '../../types/person.ts';
 
 export type OverviewProps = {
   ratingScore: number;
