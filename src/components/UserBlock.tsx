@@ -3,9 +3,12 @@ import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 import {Link} from 'react-router-dom';
 import {AppRoutes} from '../consts/AppRoutes.ts';
 import {imageDirectory} from '../consts/SrcPath.ts';
+import {useAppSelector} from '../index.tsx';
 
-function UserBlock({authStatus}: { authStatus: AuthorizationStatuses }): JSX.Element {
-  if (authStatus === AuthorizationStatuses.AUTH) {
+function UserBlock(): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authStatus);
+
+  if (authorizationStatus === AuthorizationStatuses.AUTH) {
     return (
       <ul className="user-block">
         <li className="user-block__item">

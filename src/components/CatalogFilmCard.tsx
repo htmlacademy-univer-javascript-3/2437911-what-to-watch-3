@@ -1,5 +1,5 @@
 import {JSX} from 'react';
-import {FilmPreview} from '../types/filmTypes.ts';
+import {FilmPreview} from '../types/filmData.ts';
 import VideoPlayer from './VideoPlayer.tsx';
 import {Link} from 'react-router-dom';
 import {AppRoutes} from '../consts/AppRoutes.ts';
