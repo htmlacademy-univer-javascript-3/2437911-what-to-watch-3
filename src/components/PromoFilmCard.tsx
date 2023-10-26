@@ -4,7 +4,7 @@ import WTWLogo from './WTWLogo.tsx';
 import UserBlock from './UserBlock.tsx';
 import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 import {defaultBackground, imageDirectory} from '../consts/SrcPath.ts';
-import {PromoFilm} from '../types/FilmData.ts';
+import {PromoFilm} from '../types/filmTypes.ts';
 
 type PromoFIlmCardProps = PromoFilm & {
   authStatus: AuthorizationStatuses;

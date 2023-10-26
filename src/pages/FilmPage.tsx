@@ -1,59 +1,30 @@
-import {JSX, useState} from 'react';
+import {JSX} from 'react';
 import {Helmet} from 'react-helmet-async';
 import Footer from '../components/Footer.tsx';
 import CatalogLikeThis from '../components/CatalogLikeThis.tsx';
 import FilmCardPanel from '../components/FilmCardPanel.tsx';
 import WTWLogo from '../components/WTWLogo.tsx';
 import UserBlock from '../components/UserBlock.tsx';
-import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
-import {NavLink, Outlet} from 'react-router-dom';
-import {AppRoutes} from '../consts/AppRoutes.ts';
-import classNames from 'classnames';
 import {imageDirectory} from '../consts/SrcPath.ts';
-import {PromoFilm} from '../types/FilmData.ts';
+import {FilmTypes} from '../types/filmTypes.ts';
+import Tabs from '../components/Tabs.tsx';
+import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 
-type FilmPageProps = PromoFilm & {
+type FilmPageProps = {
+  filmInfo: FilmTypes;
+  filmsLikeThis: FilmTypes[];
   authStatus: AuthorizationStatuses;
 };
 
-type FilmPageLinksProps = {
-  title: string;
-  to: string;
-}
-
-function FilmPage({
-  id,
-  backgroundImage,
-  title,
-  posterImage,
-  genre,
-  releaseDate,
-  authStatus
-}: FilmPageProps): JSX.Element {
-  const links: FilmPageLinksProps[] = [
-    {
-      title: 'Overview',
-      to: AppRoutes.Film()
-    },
-    {
-      title: 'Details',
-      to: `${AppRoutes.Film()}/details`
-    },
-    {
-      title: 'Reviews',
-      to: `${AppRoutes.Film()}/reviews`
-    }
-  ];
-
-  const [pageState, setPageState] = useState([true, false, false]);
-
+function FilmPage({authStatus, filmInfo, filmsLikeThis}: FilmPageProps): JSX.Element {
+  const {title} = filmInfo;
   return (
     <>
       <section className="film-card film-card--full">
         <Helmet><title>{title}</title></Helmet>
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={`img/${backgroundImage}`} alt={title}/>
+            <img src={`img/${filmInfo.backgroundImage}`} alt={title}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -63,48 +34,25 @@ function FilmPage({
           </header>
 
           <div className="film-card__wrap">
-            <FilmCardPanel id={id} title={title} releaseDate={releaseDate} genre={genre} hasReviewButton/>
+            <FilmCardPanel id={filmInfo.id} title={title} releaseDate={filmInfo.releaseDate} genre={filmInfo.genre}
+              hasReviewButton
+            />
           </div>
         </div>
 
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={`${imageDirectory}/${posterImage}`} alt={title} width="218" height="327"/>
+              <img src={`${imageDirectory}/${filmInfo.posterImage}`} alt={title} width="218" height="327"/>
             </div>
 
-            <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  {
-                    links.map((link, index) => (
-                      <li className={classNames('film-nav__item', {'film-nav__item--active': pageState[index]})}
-                        key={link.title}
-                      >
-                        <NavLink to={link.to} className='film-nav__link' onClick={() => {
-                          setPageState(() => {
-                            const result = [false, false, false];
-                            result[index] = true;
-                            return result;
-                          });
-                        }}
-                        >
-                          {link.title}
-                        </NavLink>
-                      </li>
-                    ))
-                  }
-                </ul>
-              </nav>
-
-              {<Outlet/>}
-            </div>
+            <Tabs {...filmInfo}/>
           </div>
         </div>
       </section>
 
       <div className="page-content">
-        <CatalogLikeThis/>
+        <CatalogLikeThis films={filmsLikeThis}/>
         <Footer/>
       </div>
     </>

@@ -1,7 +1,7 @@
-import {FilmData} from '../types/FilmData.ts';
+import {FilmTypes} from '../types/filmTypes.ts';
 import {Genres} from '../consts/Genres.ts';
 
-export const films: FilmData[] = [
+export const films: FilmTypes[] = [
   {
     id: 1,
     listImage: 'bg-the-grand-budapest-hotel.jpg',
@@ -14,12 +14,12 @@ export const films: FilmData[] = [
     ratingScore: 8.9,
     ratingsCount: 240,
     overview: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.\n\nGustave prides himself on providing first-class service to the hotel\'s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave\'s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.',
-    directors: [
+    director:
       {
         firstName: 'Wes',
         lastName: 'Anderson'
       }
-    ],
+    ,
     starring: [
       {
         firstName: 'Bill',
@@ -64,12 +64,12 @@ export const films: FilmData[] = [
     ratingScore: 6.7,
     ratingsCount: 241,
     overview: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.\n\nGustave prides himself on providing first-class service to the hotel\'s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave\'s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.',
-    directors: [
+    director:
       {
         firstName: 'Wes',
         lastName: 'Anderson'
       }
-    ],
+    ,
     starring: [
       {
         firstName: 'Bill',
@@ -114,12 +114,12 @@ export const films: FilmData[] = [
     ratingScore: 6.7,
     ratingsCount: 241,
     overview: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.\n\nGustave prides himself on providing first-class service to the hotel\'s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave\'s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.',
-    directors: [
+    director:
       {
         firstName: 'Wes',
         lastName: 'Anderson'
       }
-    ],
+    ,
     starring: [
       {
         firstName: 'Bill',
@@ -164,12 +164,12 @@ export const films: FilmData[] = [
     ratingScore: 6.7,
     ratingsCount: 241,
     overview: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.\n\nGustave prides himself on providing first-class service to the hotel\'s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave\'s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.',
-    directors: [
+    director:
       {
         firstName: 'Wes',
         lastName: 'Anderson'
       }
-    ],
+    ,
     starring: [
       {
         firstName: 'Bill',
@@ -214,12 +214,12 @@ export const films: FilmData[] = [
     ratingScore: 6.7,
     ratingsCount: 241,
     overview: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.\n\nGustave prides himself on providing first-class service to the hotel\'s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave\'s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.',
-    directors: [
+    director:
       {
         firstName: 'Wes',
         lastName: 'Anderson'
       }
-    ],
+    ,
     starring: [
       {
         firstName: 'Bill',
@@ -264,12 +264,12 @@ export const films: FilmData[] = [
     ratingScore: 6.7,
     ratingsCount: 241,
     overview: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.\n\nGustave prides himself on providing first-class service to the hotel\'s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave\'s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.',
-    directors: [
+    director:
       {
         firstName: 'Wes',
         lastName: 'Anderson'
       }
-    ],
+    ,
     starring: [
       {
         firstName: 'Bill',
@@ -314,12 +314,12 @@ export const films: FilmData[] = [
     ratingScore: 6.7,
     ratingsCount: 241,
     overview: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.\n\nGustave prides himself on providing first-class service to the hotel\'s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave\'s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.',
-    directors: [
+    director:
       {
         firstName: 'Wes',
         lastName: 'Anderson'
       }
-    ],
+    ,
     starring: [
       {
         firstName: 'Bill',
@@ -364,12 +364,12 @@ export const films: FilmData[] = [
     ratingScore: 6.7,
     ratingsCount: 241,
     overview: 'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.\n\nGustave prides himself on providing first-class service to the hotel\'s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave\'s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.',
-    directors: [
+    director:
       {
         firstName: 'Wes',
         lastName: 'Anderson'
       }
-    ],
+    ,
     starring: [
       {
         firstName: 'Bill',

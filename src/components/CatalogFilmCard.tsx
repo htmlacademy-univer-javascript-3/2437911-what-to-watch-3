@@ -1,37 +1,32 @@
-import {JSX, MouseEventHandler} from 'react';
-import {FilmPreview} from '../types/FilmData.ts';
+import {JSX} from 'react';
+import {FilmPreview} from '../types/filmTypes.ts';
 import VideoPlayer from './VideoPlayer.tsx';
 import {Link} from 'react-router-dom';
 import {AppRoutes} from '../consts/AppRoutes.ts';
-import {imageDirectory} from '../consts/SrcPath.ts';
 
-export type CatalogFilmCardProp = FilmPreview & {
+export type CatalogFilmCardProp = {
+  film: FilmPreview;
   videoSrc: string;
   isPlaying: boolean;
-  onMouseEnter: MouseEventHandler<HTMLElement> | undefined;
-  onMouseLeave: MouseEventHandler<HTMLElement> | undefined;
+  setSelectedFilm: (id: number | undefined) => void;
 };
 
 function CatalogFilmCard({
-  id,
-  title,
-  listImage,
+  film,
   videoSrc,
   isPlaying,
-  onMouseEnter,
-  onMouseLeave
+  setSelectedFilm,
 }: CatalogFilmCardProp): JSX.Element {
+  const {id, title, listImage} = film;
 
   return (
-    <article className="small-film-card catalog__films-card" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+    <article className="small-film-card catalog__films-card" onMouseEnter={() => setSelectedFilm(id)}
+      onMouseLeave={() => setSelectedFilm(undefined)}
+    >
 
-      {isPlaying && <VideoPlayer videoSrc={videoSrc} isMuted isPlaying={isPlaying} width="280" height="175"/>}
-
-      {!isPlaying && (
-        <div className="small-film-card__image">
-          <img src={`${imageDirectory}/${listImage}`} alt={title} width="280" height="175"/>
-        </div>
-      )}
+      <VideoPlayer videoSrc={videoSrc} posterSrc={listImage} className="small-film-card__image" isMuted
+        isPlaying={isPlaying} width="280" height="175"
+      />
 
       <h3 className="small-film-card__title">
         <Link to={`${AppRoutes.Film(id)}`} className="small-film-card__link">{title}</Link>

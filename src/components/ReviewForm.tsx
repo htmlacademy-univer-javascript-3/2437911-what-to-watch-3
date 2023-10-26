@@ -18,14 +18,14 @@ function ReviewForm({minRating, maxRating}: ReviewFormProps): JSX.Element {
       <form action="#" className="add-review__form">
         <div className="rating">
           <div className="rating__stars">
-            {ratings.reverse().map((x) =>
+            {ratings.reverse().map((ratingNumber) =>
               (
-                <Fragment key={x}>
-                  <input className="rating__input" id={`star-${x}`} type="radio" name="rating"
-                    value={x}
+                <Fragment key={ratingNumber}>
+                  <input className="rating__input" id={`star-${ratingNumber}`} type="radio" name="rating"
+                    value={ratingNumber}
                     onChange={(evt) => setFormData({...formData, rating: evt.target.value})}
                   />
-                  <label className="rating__label" htmlFor={`star-${x}`}>Rating {x}</label>
+                  <label className="rating__label" htmlFor={`star-${ratingNumber}`}>Rating {ratingNumber}</label>
                 </Fragment>
               ))}
           </div>

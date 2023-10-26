@@ -1,34 +1,39 @@
 import {JSX, useState} from 'react';
-import {FilmData} from '../types/FilmData.ts';
+import {FilmTypes} from '../types/filmTypes.ts';
 import CatalogFilmCard from './CatalogFilmCard.tsx';
 
 type FilmListProps = {
-  films: FilmData[];
+  films: FilmTypes[];
 };
 
 function FilmsList({films}: FilmListProps): JSX.Element {
   const [selectFilmId, setSelectFilmId] = useState<number | undefined>();
-  let selectedId: number | undefined = undefined;
+
+  let lastSelectedFilm: number | undefined = undefined;
+
+  function setSelectedFilm(id: number | undefined) {
+    lastSelectedFilm = id;
+
+    if (id !== undefined) {
+      setTimeout(() => {
+        if (lastSelectedFilm === id) {
+          setSelectFilmId(id);
+        }
+      }, 1000);
+    } else {
+      setSelectFilmId(id);
+    }
+
+  }
 
   return (
     <div className="catalog__films-list">
       {
         films.map((film) => (
-          <CatalogFilmCard id={film.id} title={film.title} listImage={film.listImage} key={film.id}
+          <CatalogFilmCard film={film} key={film.id}
             videoSrc={film.videoSrc}
             isPlaying={film.id === selectFilmId}
-            onMouseEnter={() => {
-              selectedId = film.id;
-              setTimeout(() => {
-                if (selectedId === film.id) {
-                  setSelectFilmId(film.id);
-                }
-              }, 1000);
-            }}
-            onMouseLeave={() => {
-              selectedId = undefined;
-              setSelectFilmId(undefined);
-            }}
+            setSelectedFilm={setSelectedFilm}
           />
         ))
       }

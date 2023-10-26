@@ -1,4 +1,4 @@
-import {Person} from './Person.ts';
+import {Person} from './person.ts';
 
 export type Review = {
   ratingScore: number;
