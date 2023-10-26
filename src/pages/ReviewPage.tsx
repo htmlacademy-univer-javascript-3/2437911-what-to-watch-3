@@ -1,7 +1,6 @@
 import {JSX} from 'react';
 import WTWLogo from '../components/WTWLogo.tsx';
 import UserBlock from '../components/UserBlock.tsx';
-import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 import {Link} from 'react-router-dom';
 import {AppRoutes} from '../consts/AppRoutes.ts';
 import {Helmet} from 'react-helmet-async';
@@ -43,7 +42,7 @@ function ReviewPage({id, title, posterImage, backgroundImage}: ReviewPageProps):
             </ul>
           </nav>
 
-          <UserBlock authStatus={AuthorizationStatuses.AUTH}/>
+          <UserBlock/>
         </header>
 
         <div className="film-card__poster film-card__poster--small">

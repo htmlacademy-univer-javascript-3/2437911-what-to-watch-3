@@ -21,7 +21,7 @@ function MainPage({films, promoFilm}: MainPageProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList films={films}/>
+          <GenresList/>
 
           <FilmsList films={films}/>
 

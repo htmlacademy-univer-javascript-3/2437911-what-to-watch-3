@@ -28,7 +28,7 @@ function PromoFilmCard({film}: PromoFIlmCardProps): JSX.Element {
 
       <header className="page-header film-card__head">
         <WTWLogo isLight={false}/>
-        <UserBlock authStatus={authStatus}/>
+        <UserBlock/>
       </header>
 
       {isAuth && (

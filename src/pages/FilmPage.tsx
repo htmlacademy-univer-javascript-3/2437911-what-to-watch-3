@@ -8,7 +8,6 @@ import UserBlock from '../components/UserBlock.tsx';
 import {imageDirectory} from '../consts/SrcPath.ts';
 import {FilmData} from '../types/filmData.ts';
 import Tabs from '../components/Tabs.tsx';
-import {useAppSelector} from '../index.tsx';
 
 type FilmPageProps = {
   film: FilmData;
@@ -16,8 +15,6 @@ type FilmPageProps = {
 };
 
 function FilmPage({film, filmsLikeThis}: FilmPageProps): JSX.Element {
-  const authStatus = useAppSelector((state) => state.authStatus);
-
   return (
     <>
       <section className="film-card film-card--full">
@@ -30,7 +27,7 @@ function FilmPage({film, filmsLikeThis}: FilmPageProps): JSX.Element {
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header film-card__head">
             <WTWLogo isLight={false}/>
-            <UserBlock authStatus={authStatus}/>
+            <UserBlock/>
           </header>
 
           <div className="film-card__wrap">

@@ -2,7 +2,6 @@ import {JSX} from 'react';
 import Footer from '../components/Footer.tsx';
 import WTWLogo from '../components/WTWLogo.tsx';
 import UserBlock from '../components/UserBlock.tsx';
-import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 import {FilmData} from '../types/filmData.ts';
 import FilmsList from '../components/FilmsList.tsx';
 import {Helmet} from 'react-helmet-async';
@@ -19,7 +18,7 @@ function MyListPage({films}: MyListProps): JSX.Element {
         <WTWLogo isLight={false}/>
         <h1 className="page-title user-page__title">My List <span className="user-page__film-count">9</span>
         </h1>
-        <UserBlock authStatus={AuthorizationStatuses.AUTH}/>
+        <UserBlock/>
       </header>
 
       <section className="catalog">
