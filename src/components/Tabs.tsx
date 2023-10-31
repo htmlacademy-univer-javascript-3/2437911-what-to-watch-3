@@ -4,8 +4,14 @@ import OverviewComponent, {OverviewProps} from './FilmPage/OverviewComponent.tsx
 import DetailsComponent, {DetailsProps} from './FilmPage/DetailsComponent.tsx';
 import ReviewsComponent, {ReviewsProps} from './FilmPage/ReviewsComponent.tsx';
 
+enum TabsTitle {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews'
+}
+
 type FilmPageLinksProps = {
-  title: string;
+  title: TabsTitle;
   view: JSX.Element;
 }
 
@@ -14,32 +20,32 @@ type TabsProps = OverviewProps & ReviewsProps & DetailsProps;
 function Tabs(props: TabsProps): JSX.Element {
   const links: FilmPageLinksProps[] = [
     {
-      title: 'Overview',
+      title: TabsTitle.Overview,
       view: <OverviewComponent {...props}/>
     },
     {
-      title: 'Details',
+      title: TabsTitle.Details,
       view: <DetailsComponent {...props}/>
     },
     {
-      title: 'Reviews',
+      title: TabsTitle.Reviews,
       view: <ReviewsComponent {...props}/>
     }
   ];
 
-  const [viewIndex, setViewIndex] = useState(0);
+  const [selectTab, setSelectTab] = useState(TabsTitle.Overview);
 
   return (
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
           {
-            links.map((link, index) => (
+            links.map((link) => (
               <li
-                className={classNames('film-nav__item', {'film-nav__item--active': index === viewIndex})}
+                className={classNames('film-nav__item', {'film-nav__item--active': link.title === selectTab})}
                 key={link.title}
               >
-                <nav className='film-nav__link' onClick={() => setViewIndex(index)}>
+                <nav className='film-nav__link' onClick={() => setSelectTab(link.title)}>
                   {link.title}
                 </nav>
               </li>
@@ -48,7 +54,7 @@ function Tabs(props: TabsProps): JSX.Element {
         </ul>
       </nav>
 
-      {links[viewIndex].view}
+      {links.find((link) => link.title === selectTab)?.view}
     </div>
   );
 }

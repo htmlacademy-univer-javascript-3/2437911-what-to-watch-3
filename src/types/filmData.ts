@@ -39,6 +39,6 @@ export type FilmReviews = {
   reviews: Review[];
 }
 
-export type FilmTypes = FilmPreview & FilmOverview & FilmDetails & FilmReviews & FilmShortData & PromoFilm & {
+export type FilmData = FilmPreview & FilmOverview & FilmDetails & FilmReviews & FilmShortData & PromoFilm & {
   videoSrc: string;
 };

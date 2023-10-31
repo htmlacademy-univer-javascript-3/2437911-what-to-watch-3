@@ -1,17 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './pages/App.tsx';
-import {films} from './mocks/films.ts';
-import {Genres} from './consts/Genres.ts';
+import {Provider, TypedUseSelectorHook, useSelector} from 'react-redux';
+import {store} from './store';
+import {State} from './types/state.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const genres = Object.values(Genres);
+export const useAppSelector: TypedUseSelectorHook<State> = useSelector;
 
 root.render(
   <React.StrictMode>
-    <App films={films} genres={genres}/>
+    <Provider store={store}>
+      <App/>
+    </Provider>
   </React.StrictMode>
 );

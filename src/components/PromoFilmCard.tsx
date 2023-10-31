@@ -4,21 +4,16 @@ import WTWLogo from './WTWLogo.tsx';
 import UserBlock from './UserBlock.tsx';
 import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 import {defaultBackground, imageDirectory} from '../consts/SrcPath.ts';
-import {PromoFilm} from '../types/filmTypes.ts';
+import {PromoFilm} from '../types/filmData.ts';
+import {useAppSelector} from '../index.tsx';
 
-type PromoFIlmCardProps = PromoFilm & {
-  authStatus: AuthorizationStatuses;
+type PromoFIlmCardProps = & {
+  film: PromoFilm;
 };
 
-function PromoFilmCard({
-  id,
-  title,
-  backgroundImage,
-  posterImage,
-  releaseDate,
-  genre,
-  authStatus
-}: PromoFIlmCardProps): JSX.Element {
+function PromoFilmCard({film}: PromoFIlmCardProps): JSX.Element {
+  const {id, title, backgroundImage, posterImage, releaseDate, genre} = film;
+  const authStatus = useAppSelector((state) => state.authStatus);
   const isAuth = authStatus === AuthorizationStatuses.AUTH;
 
   return (
@@ -33,7 +28,7 @@ function PromoFilmCard({
 
       <header className="page-header film-card__head">
         <WTWLogo isLight={false}/>
-        <UserBlock authStatus={authStatus}/>
+        <UserBlock/>
       </header>
 
       {isAuth && (

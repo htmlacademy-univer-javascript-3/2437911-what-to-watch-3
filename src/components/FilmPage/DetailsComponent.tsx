@@ -1,4 +1,4 @@
-import {JSX} from 'react';
+import {Fragment, JSX} from 'react';
 import {Person} from '../../types/person.ts';
 import {Genres} from '../../consts/Genres.ts';
 
@@ -30,9 +30,9 @@ function DetailsComponent({director, starring, runTimeMinute, releaseDate, genre
                     ?
                     `${p.firstName} ${p.lastName}`
                     :
-                    <>
+                    <Fragment key={`${p.firstName} ${p.lastName}`}>
                       {`${p.firstName} ${p.lastName}`}, <br/>
-                    </>
+                    </Fragment>
                 ))
             }
           </span>

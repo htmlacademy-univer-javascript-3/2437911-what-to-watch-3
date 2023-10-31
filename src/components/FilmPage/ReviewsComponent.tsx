@@ -10,18 +10,18 @@ function ReviewsComponent({reviews}: ReviewsProps): JSX.Element {
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
         {
-          reviews.map((r) => (
-            <div className="review" key={`${r.author.firstName} ${r.author.lastName}`}>
+          reviews.map((review) => (
+            <div className="review" key={`${review.author.firstName} ${review.author.lastName}`}>
               <blockquote className="review__quote">
-                <p className="review__text">{r.text} </p>
+                <p className="review__text">{review.text} </p>
 
                 <footer className="review__details">
-                  <cite className="review__author">{r.author.firstName} {r.author.lastName}</cite>
-                  <time className="review__date" dateTime="2016-12-24">{r.publicisedDate}</time>
+                  <cite className="review__author">{review.author.firstName} {review.author.lastName}</cite>
+                  <time className="review__date" dateTime="2016-12-24">{review.publicisedDate}</time>
                 </footer>
               </blockquote>
 
-              <div className="review__rating">{r.ratingScore.toString().replace('.', ',')}</div>
+              <div className="review__rating">{review.ratingScore.toString().replace('.', ',')}</div>
             </div>
           ))
         }

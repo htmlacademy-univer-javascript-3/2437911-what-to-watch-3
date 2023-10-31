@@ -1,6 +1,5 @@
-import {JSX, useState} from 'react';
+import {JSX} from 'react';
 import MainPage from './MainPage.tsx';
-import {FilmTypes} from '../types/filmTypes.ts';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import SignInPage from './SignInPage.tsx';
 import MyListPage from './MyListPage.tsx';
@@ -9,23 +8,14 @@ import ReviewPage from './ReviewPage.tsx';
 import PlayerPage from './PlayerPage.tsx';
 import NotFoundPage from './NotFoundPage.tsx';
 import PrivateRoute from '../components/PrivateRoute.tsx';
-import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 import {AppRoutes} from '../consts/AppRoutes.ts';
 import {HelmetProvider} from 'react-helmet-async';
 import ScrollToTop from '../functions/ScrollToTop.ts';
-import {Genres} from '../consts/Genres.ts';
+import {useAppSelector} from '../index.tsx';
 
-type AppProps = {
-  films: FilmTypes[];
-  genres: Genres[];
-};
-
-function App({films, genres}: AppProps): JSX.Element {
-  const authorizationStatus = AuthorizationStatuses.AUTH;
-
-  const [filmId,] = useState(1);
-
-  const [filmInfo] = films.filter((f) => f.id === filmId);
+function App(): JSX.Element {
+  const films = useAppSelector((state) => state.genreFilms);
+  const currentFilm = films[0];
 
   return (
     <HelmetProvider>
@@ -34,31 +24,31 @@ function App({films, genres}: AppProps): JSX.Element {
         <Routes>
           <Route path={AppRoutes.Main}
             element={
-              <MainPage films={films} genres={genres} promoFilm={filmInfo} authStatus={authorizationStatus}/>
+              <MainPage films={films} promoFilm={currentFilm}/>
             }
           />
           <Route path={AppRoutes.SignIn} element={<SignInPage/>}/>
           <Route path={AppRoutes.MyList} element={
-            <PrivateRoute authorizationStatus={authorizationStatus}>
+            <PrivateRoute>
               <MyListPage films={films}/>
             </PrivateRoute>
           }
           />
           <Route path={AppRoutes.Film()}
             element={
-              <FilmPage filmInfo={filmInfo} authStatus={authorizationStatus} filmsLikeThis={films.slice(4, 8)}/>
+              <FilmPage film={currentFilm} similarFilms={films.slice(4, 8)}/>
             }
           />
           <Route path={AppRoutes.AddReview()} element={
-            <ReviewPage id={filmInfo.id} title={filmInfo.title} posterImage={filmInfo.posterImage}
-              backgroundImage={filmInfo.backgroundImage}
+            <ReviewPage id={currentFilm.id} title={currentFilm.title} posterImage={currentFilm.posterImage}
+              backgroundImage={currentFilm.backgroundImage}
             />
           }
           />
           <Route path={AppRoutes.Player()}
             element={
-              <PlayerPage title={filmInfo.title} posterSrc={filmInfo.posterImage}
-                videoSrc={filmInfo.videoSrc}
+              <PlayerPage title={currentFilm.title} posterSrc={currentFilm.posterImage}
+                videoSrc={currentFilm.videoSrc}
               />
             }
           />

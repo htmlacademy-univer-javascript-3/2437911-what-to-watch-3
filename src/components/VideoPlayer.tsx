@@ -38,16 +38,20 @@ function VideoPlayer({
   }, []);
 
   useEffect(() => {
-    if (!isLoaded || !videoRef.current) {
+    const videoPlayer = videoRef.current;
+    if (!isLoaded || !videoPlayer) {
       return;
     }
 
-    if (isPlaying) {
-      videoRef.current.play();
-      return;
-    }
+    const timerId = setTimeout(() => {
+      if (isPlaying) {
+        videoPlayer.play();
+      }
+    }, 1000);
 
-    videoRef.current.load();
+    videoPlayer.load();
+
+    return () => clearTimeout(timerId);
   }, [isPlaying, isLoaded]);
 
   return (

@@ -6,35 +6,32 @@ import FilmCardPanel from '../components/FilmCardPanel.tsx';
 import WTWLogo from '../components/WTWLogo.tsx';
 import UserBlock from '../components/UserBlock.tsx';
 import {imageDirectory} from '../consts/SrcPath.ts';
-import {FilmTypes} from '../types/filmTypes.ts';
+import {FilmData} from '../types/filmData.ts';
 import Tabs from '../components/Tabs.tsx';
-import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
 
 type FilmPageProps = {
-  filmInfo: FilmTypes;
-  filmsLikeThis: FilmTypes[];
-  authStatus: AuthorizationStatuses;
+  film: FilmData;
+  similarFilms: FilmData[];
 };
 
-function FilmPage({authStatus, filmInfo, filmsLikeThis}: FilmPageProps): JSX.Element {
-  const {title} = filmInfo;
+function FilmPage({film, similarFilms}: FilmPageProps): JSX.Element {
   return (
     <>
       <section className="film-card film-card--full">
-        <Helmet><title>{title}</title></Helmet>
+        <Helmet><title>{film.title}</title></Helmet>
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={`img/${filmInfo.backgroundImage}`} alt={title}/>
+            <img src={`img/${film.backgroundImage}`} alt={film.title}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header film-card__head">
             <WTWLogo isLight={false}/>
-            <UserBlock authStatus={authStatus}/>
+            <UserBlock/>
           </header>
 
           <div className="film-card__wrap">
-            <FilmCardPanel id={filmInfo.id} title={title} releaseDate={filmInfo.releaseDate} genre={filmInfo.genre}
+            <FilmCardPanel id={film.id} title={film.title} releaseDate={film.releaseDate} genre={film.genre}
               hasReviewButton
             />
           </div>
@@ -43,16 +40,16 @@ function FilmPage({authStatus, filmInfo, filmsLikeThis}: FilmPageProps): JSX.Ele
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={`${imageDirectory}/${filmInfo.posterImage}`} alt={title} width="218" height="327"/>
+              <img src={`${imageDirectory}/${film.posterImage}`} alt={film.title} width="218" height="327"/>
             </div>
 
-            <Tabs {...filmInfo}/>
+            <Tabs {...film}/>
           </div>
         </div>
       </section>
 
       <div className="page-content">
-        <CatalogLikeThis films={filmsLikeThis}/>
+        <CatalogLikeThis films={similarFilms}/>
         <Footer/>
       </div>
     </>
