@@ -36,7 +36,7 @@ function App(): JSX.Element {
           />
           <Route path={AppRoutes.Film()}
             element={
-              <FilmPage film={currentFilm} filmsLikeThis={films.slice(4, 8)}/>
+              <FilmPage film={currentFilm} similarFilms={films.slice(4, 8)}/>
             }
           />
           <Route path={AppRoutes.AddReview()} element={

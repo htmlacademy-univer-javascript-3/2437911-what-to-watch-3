@@ -1,5 +1,6 @@
 import {JSX} from 'react';
 import {Person} from '../../types/person.ts';
+import {Rating} from '../../consts/Rating.ts';
 
 export type OverviewProps = {
   ratingScore: number;
@@ -10,19 +11,19 @@ export type OverviewProps = {
 }
 
 function setRatingText(ratingScore: number): string {
-  if (ratingScore < 3) {
+  if (ratingScore < Rating.Normal) {
     return 'Bad';
   }
 
-  if (ratingScore < 5) {
+  if (ratingScore < Rating.Good) {
     return 'Normal';
   }
 
-  if (ratingScore < 8) {
+  if (ratingScore < Rating.VeryGood) {
     return 'Good';
   }
 
-  if (ratingScore < 10) {
+  if (ratingScore < Rating.Awesome) {
     return 'Very Good';
   }
 

@@ -11,10 +11,10 @@ import Tabs from '../components/Tabs.tsx';
 
 type FilmPageProps = {
   film: FilmData;
-  filmsLikeThis: FilmData[];
+  similarFilms: FilmData[];
 };
 
-function FilmPage({film, filmsLikeThis}: FilmPageProps): JSX.Element {
+function FilmPage({film, similarFilms}: FilmPageProps): JSX.Element {
   return (
     <>
       <section className="film-card film-card--full">
@@ -49,7 +49,7 @@ function FilmPage({film, filmsLikeThis}: FilmPageProps): JSX.Element {
       </section>
 
       <div className="page-content">
-        <CatalogLikeThis films={filmsLikeThis}/>
+        <CatalogLikeThis films={similarFilms}/>
         <Footer/>
       </div>
     </>

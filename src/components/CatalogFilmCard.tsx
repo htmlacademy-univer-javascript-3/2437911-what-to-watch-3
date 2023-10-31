@@ -8,7 +8,7 @@ export type CatalogFilmCardProp = {
   film: FilmPreview;
   videoSrc: string;
   isPlaying: boolean;
-  setSelectedFilm: (id: number | undefined) => void;
+  setSelectedFilm: (id?: number) => void;
 };
 
 function CatalogFilmCard({
@@ -21,7 +21,7 @@ function CatalogFilmCard({
 
   return (
     <article className="small-film-card catalog__films-card" onMouseEnter={() => setSelectedFilm(id)}
-      onMouseLeave={() => setSelectedFilm(undefined)}
+      onMouseLeave={() => setSelectedFilm()}
     >
 
       <VideoPlayer videoSrc={videoSrc} posterSrc={listImage} className="small-film-card__image" isMuted
