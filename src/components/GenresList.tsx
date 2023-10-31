@@ -6,7 +6,11 @@ import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../types/state.ts';
 import {useAppSelector} from '../index.tsx';
 
-function GenresList(): JSX.Element {
+type GenreListProps = {
+  onClickAction?: () => void;
+}
+
+function GenresList({onClickAction}: GenreListProps): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const currentGenre = useAppSelector((state) => state.activeGenre);
   const genres: Genres[] = useAppSelector((state) => state.allGenres);
@@ -20,6 +24,7 @@ function GenresList(): JSX.Element {
 
         <nav className="catalog__genres-link"
           onClick={() => {
+            onClickAction?.();
             dispatch(setAllGenreAction());
           }}
         >
@@ -35,6 +40,7 @@ function GenresList(): JSX.Element {
             >
               <nav className="catalog__genres-link"
                 onClick={() => {
+                  onClickAction?.();
                   dispatch(setSpecificGenreAction(genre));
                 }}
               >{genre}
