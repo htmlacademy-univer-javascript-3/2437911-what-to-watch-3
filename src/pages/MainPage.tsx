@@ -1,4 +1,4 @@
-import {JSX} from 'react';
+import {JSX, useState} from 'react';
 import Footer from '../components/Footer.tsx';
 import PromoFilmCard from '../components/PromoFilmCard.tsx';
 import {FilmData} from '../types/filmData.ts';
@@ -11,7 +11,11 @@ type MainPageProps = {
   promoFilm: FilmData;
 };
 
+const PAGE_FILMS_COUNT = 8;
+
 function MainPage({films, promoFilm}: MainPageProps): JSX.Element {
+  const [pageCountFilms, setPageCountFilms] = useState(PAGE_FILMS_COUNT);
+
   return (
     <>
       <Helmet><title>WTW</title></Helmet>
@@ -21,13 +25,21 @@ function MainPage({films, promoFilm}: MainPageProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenresList/>
+          <GenresList onClickAction={() => setPageCountFilms(PAGE_FILMS_COUNT)}/>
 
-          <FilmsList films={films}/>
+          <FilmsList films={films.slice(0, pageCountFilms)}/>
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {
+            pageCountFilms < films.length &&
+            <div className="catalog__more">
+              <button className="catalog__button" type="button"
+                onClick={() => setPageCountFilms(pageCountFilms + PAGE_FILMS_COUNT)}
+              >
+                Show more
+              </button>
+            </div>
+          }
+
         </section>
 
         <Footer/>
