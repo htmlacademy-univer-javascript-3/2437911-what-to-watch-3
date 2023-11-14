@@ -14,7 +14,7 @@ import ScrollToTop from '../functions/ScrollToTop.ts';
 import {useAppSelector} from '../index.tsx';
 
 function App(): JSX.Element {
-  const films = useAppSelector((state) => state.genreFilms);
+  const films = useAppSelector((state) => state.films);
   const currentFilm = films[0];
 
   return (
