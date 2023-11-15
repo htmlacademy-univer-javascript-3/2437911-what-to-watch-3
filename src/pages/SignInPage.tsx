@@ -1,9 +1,30 @@
-import {JSX} from 'react';
+import {FormEvent, JSX, useRef} from 'react';
 import Footer from '../components/Footer.tsx';
 import WTWLogo from '../components/WTWLogo.tsx';
 import {Helmet} from 'react-helmet-async';
+import {loginAction} from '../store/api-actions.ts';
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '../types/state.ts';
+import {useAppSelector} from '../store';
 
-function SignInPage({message}: { message?: string }): JSX.Element {
+function SignInPage(): JSX.Element {
+  const loginRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const errorMessage = useAppSelector((state) => state.error);
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (loginRef.current !== null && passwordRef.current !== null) {
+      dispatch(loginAction({
+        login: loginRef.current.value,
+        password: passwordRef.current.value
+      }));
+    }
+  };
+
   return (
     <div className="user-page">
       <Helmet><title>WTW sign in</title></Helmet>
@@ -14,23 +35,24 @@ function SignInPage({message}: { message?: string }): JSX.Element {
       </header>
 
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form">
-          {message && (
+        <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
+
+          {errorMessage && (
             <div className="sign-in__message">
-              <p>{message}</p>
+              <p>{errorMessage}</p>
             </div>
           )}
 
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email"
-                id="user-email"
+                id="user-email" ref={loginRef}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
               <input className="sign-in__input" type="password" placeholder="Password"
-                name="user-password" id="user-password"
+                name="user-password" id="user-password" ref={passwordRef}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
