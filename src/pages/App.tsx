@@ -1,6 +1,6 @@
 import {JSX} from 'react';
 import MainPage from './MainPage.tsx';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import SignInPage from './SignInPage.tsx';
 import NotFoundPage from './NotFoundPage.tsx';
 import {AppRoute} from '../consts/app-route.ts';
@@ -9,6 +9,8 @@ import ScrollToTop from '../functions/ScrollToTop.ts';
 import {useAppSelector} from '../store';
 import {AuthorizationStatus} from '../consts/authorization-status.ts';
 import LoadingScreen from './loading-page/loading-screen.tsx';
+import HistoryRouter from '../browser-history/history-route.tsx';
+import browserHistory from '../browser-history/browser-history.ts';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authStatus);
@@ -22,7 +24,7 @@ function App(): JSX.Element {
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <ScrollToTop/>
         <Routes>
           <Route path={AppRoute.Main}
@@ -53,7 +55,7 @@ function App(): JSX.Element {
           {/*/>*/}
           <Route path={'*'} element={<NotFoundPage/>}/>
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }

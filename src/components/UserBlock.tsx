@@ -4,9 +4,13 @@ import {Link} from 'react-router-dom';
 import {AppRoute} from '../consts/app-route.ts';
 import {imageDirectory} from '../consts/src-path.ts';
 import {useAppSelector} from '../store';
+import {AppDispatch} from '../types/state.ts';
+import {useDispatch} from 'react-redux';
+import {logoutAction} from '../store/api-actions.ts';
 
 function UserBlock(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authStatus);
+  const dispatch = useDispatch<AppDispatch>();
 
   if (authorizationStatus === AuthorizationStatus.Auth) {
     return (
@@ -17,7 +21,13 @@ function UserBlock(): JSX.Element {
           </div>
         </li>
         <li className="user-block__item">
-          <a className="user-block__link">Sign out</a>
+          <a className="user-block__link"
+            onClick={() => {
+              dispatch(logoutAction());
+            }}
+          >
+            Sign out
+          </a>
         </li>
       </ul>
     );
