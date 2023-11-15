@@ -1,13 +1,13 @@
 import {Fragment, JSX} from 'react';
 import {Person} from '../../types/person.ts';
-import {Genres} from '../../consts/Genres.ts';
+import {Genre} from '../../consts/genre.ts';
 
 export type DetailsProps = {
   director: Person;
   starring: Person[];
   runTimeMinute: number;
   releaseDate: string;
-  genre: Genres;
+  genre: Genre;
 }
 
 function DetailsComponent({director, starring, runTimeMinute, releaseDate, genre}: DetailsProps): JSX.Element {

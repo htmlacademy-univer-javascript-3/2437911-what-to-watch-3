@@ -2,12 +2,12 @@ import {JSX} from 'react';
 import Footer from '../components/Footer.tsx';
 import WTWLogo from '../components/WTWLogo.tsx';
 import UserBlock from '../components/UserBlock.tsx';
-import {FilmData} from '../types/filmData.ts';
+import {FilmPreview} from '../types/film-data.ts';
 import FilmsList from '../components/FilmsList.tsx';
 import {Helmet} from 'react-helmet-async';
 
 type MyListProps = {
-  films: FilmData[];
+  films: FilmPreview[];
 }
 
 function MyListPage({films}: MyListProps): JSX.Element {

@@ -1,7 +1,7 @@
 import {JSX} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import {AppRoutes} from '../consts/AppRoutes.ts';
-import {FilmShortData} from '../types/filmData.ts';
+import {AppRoute} from '../consts/app-route.ts';
+import {FilmShortData} from '../types/film-data.ts';
 
 type FilmCardPanelProps = FilmShortData & {
   hasReviewButton: boolean;
@@ -20,7 +20,7 @@ function FilmCardPanel({id, title, genre, releaseDate, hasReviewButton}: FilmCar
 
       <div className="film-card__buttons">
         <button className="btn btn--play film-card__button" type="button"
-          onClick={() => navigate(AppRoutes.Player(id))}
+          onClick={() => navigate(AppRoute.Player(id))}
         >
           <svg viewBox="0 0 19 19" width="19" height="19">
             <use xlinkHref="#play-s"></use>
@@ -28,7 +28,7 @@ function FilmCardPanel({id, title, genre, releaseDate, hasReviewButton}: FilmCar
           <span>Play</span>
         </button>
         <button className="btn btn--play film-card__button" type="button"
-          onClick={() => navigate(AppRoutes.MyList)}
+          onClick={() => navigate(AppRoute.MyList)}
         >
           <svg viewBox="0 0 19 20" width="19" height="20">
             <use xlinkHref="#add"></use>
@@ -37,7 +37,7 @@ function FilmCardPanel({id, title, genre, releaseDate, hasReviewButton}: FilmCar
           <span className="film-card__count">9</span>
         </button>
         {hasReviewButton && (
-          <Link to={AppRoutes.AddReview(id)} className="btn film-card__button">Add review</Link>
+          <Link to={AppRoute.AddReview(id)} className="btn film-card__button">Add review</Link>
         )}
       </div>
     </div>

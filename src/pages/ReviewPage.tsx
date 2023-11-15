@@ -2,16 +2,16 @@ import {JSX} from 'react';
 import WTWLogo from '../components/WTWLogo.tsx';
 import UserBlock from '../components/UserBlock.tsx';
 import {Link} from 'react-router-dom';
-import {AppRoutes} from '../consts/AppRoutes.ts';
+import {AppRoute} from '../consts/app-route.ts';
 import {Helmet} from 'react-helmet-async';
 import ReviewForm from '../components/ReviewForm.tsx';
-import {imageDirectory} from '../consts/SrcPath.ts';
+import {imageDirectory} from '../consts/src-path.ts';
 
 const MINRATING = 1;
 const MAXRATING = 10;
 
 type ReviewPageProps = {
-  id: number;
+  id: string;
   backgroundImage: string;
   title: string;
   posterImage: string;
@@ -34,7 +34,7 @@ function ReviewPage({id, title, posterImage, backgroundImage}: ReviewPageProps):
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={AppRoutes.Film(id)} className="breadcrumbs__link">{title}</Link>
+                <Link to={AppRoute.Film(id)} className="breadcrumbs__link">{title}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>

@@ -1,6 +1,6 @@
 import {JSX} from 'react';
 import {Person} from '../../types/person.ts';
-import {Rating} from '../../consts/Rating.ts';
+import {Rating} from '../../consts/rating.ts';
 
 export type OverviewProps = {
   ratingScore: number;

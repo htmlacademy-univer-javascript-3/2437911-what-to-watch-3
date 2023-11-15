@@ -1,10 +1,10 @@
 import {JSX} from 'react';
-import {Genres} from '../consts/Genres.ts';
+import {Genre} from '../consts/genre.ts';
 import {setCurrentGenre} from '../store/actions.ts';
 import classNames from 'classnames';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../types/state.ts';
-import {useAppSelector} from '../index.tsx';
+import {useAppSelector} from '../store';
 import {getGenres} from '../functions/getGenres.ts';
 
 type GenreListProps = {
@@ -14,7 +14,8 @@ type GenreListProps = {
 function GenresList({onClickAction}: GenreListProps): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const currentGenre = useAppSelector((state) => state.currentGenre);
-  const genres: Genres[] = getGenres();
+  const films = useAppSelector((state) => state.films);
+  const genres: Genre[] = getGenres(films);
 
   return (
     <ul className="catalog__genres-list">

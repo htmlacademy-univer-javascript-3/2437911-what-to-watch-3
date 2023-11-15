@@ -1,5 +1,4 @@
 import {JSX, useEffect, useRef, useState} from 'react';
-import {imageDirectory} from '../consts/SrcPath.ts';
 
 type VideoPlayerProps = {
   videoSrc: string;
@@ -55,11 +54,11 @@ function VideoPlayer({
   }, [isPlaying, isLoaded]);
 
   return (
-    <video poster={posterSrc && `${imageDirectory}/${posterSrc}`}
+    <video poster={posterSrc && `${posterSrc}`}
       className={className} ref={videoRef}
       width={width} height={height} muted={isMuted}
     >
-      <source src={`video/${videoSrc}`} type='video/mp4'/>
+      <source src={videoSrc} type='video/mp4'/>
     </video>
   );
 }
