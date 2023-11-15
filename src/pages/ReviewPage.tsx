@@ -11,7 +11,7 @@ const MINRATING = 1;
 const MAXRATING = 10;
 
 type ReviewPageProps = {
-  id: number;
+  id: string;
   backgroundImage: string;
   title: string;
   posterImage: string;
