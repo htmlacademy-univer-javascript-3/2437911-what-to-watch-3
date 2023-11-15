@@ -1,20 +1,22 @@
 import {JSX, useState} from 'react';
 import Footer from '../components/Footer.tsx';
 import PromoFilmCard from '../components/PromoFilmCard.tsx';
-import {FilmData} from '../types/filmData.ts';
 import FilmsList from '../components/FilmsList.tsx';
 import {Helmet} from 'react-helmet-async';
 import GenresList from '../components/GenresList.tsx';
-
-type MainPageProps = {
-  films: FilmData[];
-  promoFilm: FilmData;
-};
+import {useAppSelector} from '../store';
+import NotFoundPage from './NotFoundPage.tsx';
 
 const PAGE_FILMS_COUNT = 8;
 
-function MainPage({films, promoFilm}: MainPageProps): JSX.Element {
+function MainPage(): JSX.Element {
+  const promoFilm = useAppSelector((state) => state.promoFilm);
+  const genreFilms = useAppSelector((state) => state.genreFilms);
   const [pageCountFilms, setPageCountFilms] = useState(PAGE_FILMS_COUNT);
+
+  if (promoFilm === undefined) {
+    return (<NotFoundPage/>);
+  }
 
   return (
     <>
@@ -27,10 +29,10 @@ function MainPage({films, promoFilm}: MainPageProps): JSX.Element {
 
           <GenresList onClickAction={() => setPageCountFilms(PAGE_FILMS_COUNT)}/>
 
-          <FilmsList films={films.slice(0, pageCountFilms)}/>
+          <FilmsList films={genreFilms.slice(0, pageCountFilms)}/>
 
           {
-            pageCountFilms < films.length &&
+            pageCountFilms < genreFilms.length &&
             <div className="catalog__more">
               <button className="catalog__button" type="button"
                 onClick={() => setPageCountFilms(pageCountFilms + PAGE_FILMS_COUNT)}

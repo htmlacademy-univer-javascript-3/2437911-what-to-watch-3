@@ -1,8 +1,11 @@
 import {createAction} from '@reduxjs/toolkit';
-import {Genres} from '../consts/Genres.ts';
+import {Genre} from '../consts/genre.ts';
+import {FilmPreview, PromoFilm} from '../types/film-data.ts';
 
-export const setCurrentGenre = createAction<Genres>('setActiveGenre');
+export const setCurrentGenre = createAction<Genre>('setCurrentGenre');
 
-export const setAllGenreAction = createAction(Genres.AllGenres);
+export const loadFilms = createAction<FilmPreview[]>('api/loadFilms');
 
-export const setCurrentFilm = createAction<number>('setCurrentFilm');
+export const loadPromoFilm = createAction<PromoFilm>('api/loadPromoFilm');
+
+export const setFilmLoadingStatus = createAction<boolean>('api/setFilmLoadingStatus');

@@ -1,14 +1,14 @@
 import {JSX} from 'react';
-import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
+import {AuthorizationStatus} from '../consts/authorization-status.ts';
 import {Link} from 'react-router-dom';
-import {AppRoutes} from '../consts/AppRoutes.ts';
-import {imageDirectory} from '../consts/SrcPath.ts';
-import {useAppSelector} from '../index.tsx';
+import {AppRoute} from '../consts/app-route.ts';
+import {imageDirectory} from '../consts/src-path.ts';
+import {useAppSelector} from '../store';
 
 function UserBlock(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authStatus);
 
-  if (authorizationStatus === AuthorizationStatuses.AUTH) {
+  if (authorizationStatus === AuthorizationStatus.Auth) {
     return (
       <ul className="user-block">
         <li className="user-block__item">
@@ -24,7 +24,7 @@ function UserBlock(): JSX.Element {
   } else {
     return (
       <div className="user-block">
-        <Link to={AppRoutes.SignIn} className="user-block__link">Sign In</Link>
+        <Link to={AppRoute.SignIn} className="user-block__link">Sign In</Link>
       </div>
     );
 

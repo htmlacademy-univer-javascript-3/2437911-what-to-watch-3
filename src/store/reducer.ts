@@ -1,30 +1,41 @@
-import {Genres} from '../consts/Genres.ts';
-import {films} from '../mocks/films.ts';
-import {FilmData} from '../types/filmData.ts';
+import {Genre} from '../consts/genre.ts';
+import {FilmPreview, PromoFilm} from '../types/film-data.ts';
 import {createReducer} from '@reduxjs/toolkit';
-import {setAllGenreAction, setCurrentGenre} from './actions.ts';
-import {AuthorizationStatuses} from '../consts/AuthorizationStatuses.ts';
+import {loadFilms, loadPromoFilm, setCurrentGenre, setFilmLoadingStatus} from './actions.ts';
+import {AuthorizationStatus} from '../consts/authorization-status.ts';
 
 export type stateProps = {
-  currentGenre: Genres;
-  films: FilmData[];
-  authStatus: AuthorizationStatuses;
+  films: FilmPreview[];
+  promoFilm?: PromoFilm;
+  currentGenre: Genre;
+  genreFilms: FilmPreview[];
+  authStatus: AuthorizationStatus;
+  isFilmsLoading: boolean;
 }
 
 const startState: stateProps = {
-  currentGenre: Genres.AllGenres,
-  films: films,
-  authStatus: AuthorizationStatuses.AUTH
+  films: [],
+  promoFilm: undefined,
+  currentGenre: Genre.AllGenres,
+  genreFilms: [],
+  authStatus: AuthorizationStatus.Auth,
+  isFilmsLoading: false
 };
 
 export const reducer = createReducer(startState, (builder) => {
   builder
     .addCase(setCurrentGenre, (state, action) => {
       state.currentGenre = action.payload;
-      state.films = films.filter((film) => film.genre === state.currentGenre || state.currentGenre === Genres.AllGenres);
+      state.genreFilms = state.films.filter((film) => film.genre === state.currentGenre || state.currentGenre === Genre.AllGenres);
     })
-    .addCase(setAllGenreAction, (state) => {
-      state.currentGenre = Genres.AllGenres;
-      state.films = films;
+    .addCase(loadFilms, (state, action) => {
+      state.films = action.payload;
+      state.genreFilms = action.payload;
+    })
+    .addCase(loadPromoFilm, (state, action) => {
+      state.promoFilm = action.payload;
+    })
+    .addCase(setFilmLoadingStatus, (state, action) => {
+      state.isFilmsLoading = action.payload;
     });
 });
