@@ -15,7 +15,7 @@ function GenresList({onClickAction}: GenreListProps): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const currentGenre = useAppSelector((state) => state.currentGenre);
   const films = useAppSelector((state) => state.films);
-  const genres: Genre[] = getGenres(films);
+  const genres: Genre[] = getGenres(films.data);
 
   return (
     <ul className="catalog__genres-list">

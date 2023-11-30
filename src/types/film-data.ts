@@ -1,5 +1,3 @@
-import {Review} from './review.ts';
-import {Person} from './person.ts';
 import {Genre} from '../consts/genre.ts';
 
 export type FilmPreview = {
@@ -21,32 +19,20 @@ export type PromoFilm = {
   isFavorite: boolean;
 }
 
-export type FilmShortData = {
+export type Film = {
   id: string;
-  title: string;
+  name: string;
+  posterImage: string;
+  backgroundImage: string;
+  backgroundColor: string;
+  videoLink: string;
+  description: string;
+  rating: number;
+  scoresCount: number;
+  director: string;
+  starring: string[];
+  runTime: number;
   genre: Genre;
-  releaseDate: string;
+  released: string;
+  isFavorite: boolean;
 }
-
-export type FilmDetails = {
-  director: Person;
-  starring: Person[];
-  genre: Genre;
-  releaseDate: string;
-  runTimeMinute: number;
-}
-
-export type FilmOverview = {
-  ratingScore: number;
-  ratingsCount: number;
-  overview: string;
-  director: Person;
-  starring: Person[];
-}
-export type FilmReviews = {
-  reviews: Review[];
-}
-
-export type FilmData = FilmPreview & FilmOverview & FilmDetails & FilmReviews & FilmShortData & PromoFilm & {
-  videoSrc: string;
-};

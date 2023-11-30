@@ -1,13 +1,13 @@
-export enum ApiRoute {
-  Films = '/films',
-  Film = '/films/:id',
-  SimilarFilms = '/films/:id/similar',
-  PromoFilm = '/promo',
-  Favorite = '/favorite',
-  UpdateFavoriteStatus = '/favorite/:id/:status',
-  Comments = '/comments/:id',
-  AddComment = '/comments/:id',
-  CheckLogin = '/login',
-  Login = '/login',
-  Logout = '/logout'
-}
+export const ApiRoute = {
+  Films: '/films',
+  Film: (id?: string) => `/films/${id || ':id'}`,
+  SimilarFilms: (id?: string) => `/films/${id || ':id'}/similar`,
+  PromoFilm: '/promo',
+  Favorite: '/favorite',
+  UpdateFavoriteStatus: (id?: string, status?: number) => `/favorite/${id || ':id'}/${status || ':status'}`,
+  Comments: (id?: string) => `/comments/${id || ':id'}`,
+  AddComment: (id?: string) => `/comments/${id || ':id'}`,
+  CheckLogin: '/login',
+  Login: '/login',
+  Logout: '/logout'
+};

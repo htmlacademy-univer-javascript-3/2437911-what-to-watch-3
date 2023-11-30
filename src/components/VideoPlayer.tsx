@@ -10,6 +10,8 @@ type VideoPlayerProps = {
   height?: string | number;
 }
 
+const VIDEO_PLAY_DELAY = 1000;
+
 function VideoPlayer({
   videoSrc,
   posterSrc,
@@ -46,7 +48,7 @@ function VideoPlayer({
       if (isPlaying) {
         videoPlayer.play();
       }
-    }, 1000);
+    }, VIDEO_PLAY_DELAY);
 
     videoPlayer.load();
 
