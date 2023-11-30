@@ -12,7 +12,7 @@ type PromoFIlmCardProps = & {
 };
 
 function PromoFilmCard({film}: PromoFIlmCardProps): JSX.Element {
-  const {id, name, backgroundImage, posterImage, released, genre} = film;
+  const {name, backgroundImage, posterImage} = film;
   const authStatus = useAppSelector((state) => state.authStatus);
   const isAuth = authStatus === AuthorizationStatus.Auth;
 
@@ -38,7 +38,7 @@ function PromoFilmCard({film}: PromoFIlmCardProps): JSX.Element {
               <img src={posterImage} alt={name} width="218" height="327"/>
             </div>
 
-            <FilmCardPanel id={id} title={name} releaseDate={released} genre={genre} hasReviewButton={false}/>
+            <FilmCardPanel film={film} hasReviewButton={false}/>
           </div>
         </div>
       )}

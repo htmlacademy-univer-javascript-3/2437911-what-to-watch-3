@@ -16,8 +16,7 @@ function MyListPage({films}: MyListProps): JSX.Element {
       <Helmet><title>My list</title></Helmet>
       <header className="page-header user-page__head">
         <WTWLogo isLight={false}/>
-        <h1 className="page-title user-page__title">My List <span className="user-page__film-count">9</span>
-        </h1>
+        <h1 className="page-title user-page__title">My List <span className="user-page__film-count">9</span></h1>
         <UserBlock/>
       </header>
 

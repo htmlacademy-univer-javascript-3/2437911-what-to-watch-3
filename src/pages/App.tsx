@@ -11,10 +11,14 @@ import {AuthorizationStatus} from '../consts/authorization-status.ts';
 import LoadingScreen from './loading-page/loading-screen.tsx';
 import HistoryRouter from '../browser-history/history-route.tsx';
 import browserHistory from '../browser-history/browser-history.ts';
+import FilmPage from './FilmPage.tsx';
+import ReviewPage from './ReviewPage.tsx';
+import PlayerPage from './PlayerPage.tsx';
+import {authStatusSelector, getFilmsLoadingStatus} from '../store/selectors/selectors.ts';
 
 function App(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authStatus);
-  const isFilmsDataLoading = useAppSelector((state) => state.isFilmsLoading);
+  const authorizationStatus = useAppSelector(authStatusSelector);
+  const isFilmsDataLoading = useAppSelector(getFilmsLoadingStatus);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isFilmsDataLoading) {
     return (
@@ -39,20 +43,20 @@ function App(): JSX.Element {
           {/*  </PrivateRoute>*/}
           {/*}*/}
           {/*/>*/}
-          {/*<Route path={AppRoute.Film()}*/}
-          {/*  element={*/}
-          {/*    <FilmPage/>*/}
-          {/*  }*/}
-          {/*/>*/}
-          {/*<Route path={AppRoute.AddReview()} element={*/}
-          {/*  <ReviewPage/>*/}
-          {/*}*/}
-          {/*/>*/}
-          {/*<Route path={AppRoute.Player()}*/}
-          {/*  element={*/}
-          {/*    <PlayerPage/>*/}
-          {/*  }*/}
-          {/*/>*/}
+          <Route path={AppRoute.Film()}
+            element={
+              <FilmPage/>
+            }
+          />
+          <Route path={AppRoute.AddReview()} element={
+            <ReviewPage/>
+          }
+          />
+          <Route path={AppRoute.Player()}
+            element={
+              <PlayerPage/>
+            }
+          />
           <Route path={'*'} element={<NotFoundPage/>}/>
         </Routes>
       </HistoryRouter>

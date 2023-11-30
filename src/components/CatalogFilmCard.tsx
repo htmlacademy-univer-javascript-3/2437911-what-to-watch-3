@@ -22,9 +22,11 @@ function CatalogFilmCard({
       onMouseLeave={() => setSelectedFilm()}
     >
 
-      <VideoPlayer videoSrc={previewVideoLink} posterSrc={previewImage} className="small-film-card__image" isMuted
-        isPlaying={isPlaying} width="280" height="175"
-      />
+      <Link to={`${AppRoute.Film(id)}`}>
+        <VideoPlayer videoSrc={previewVideoLink} posterSrc={previewImage} className="small-film-card__image" isMuted
+          isPlaying={isPlaying} width="280" height="175"
+        />
+      </Link>
 
       <h3 className="small-film-card__title">
         <Link to={`${AppRoute.Film(id)}`} className="small-film-card__link">{name}</Link>

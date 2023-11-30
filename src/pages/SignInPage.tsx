@@ -5,21 +5,22 @@ import {Helmet} from 'react-helmet-async';
 import {loginAction} from '../store/api-actions.ts';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../types/state.ts';
+import {errorsSelector} from '../store/selectors/selectors.ts';
 import {useAppSelector} from '../store';
 
 function SignInPage(): JSX.Element {
-  const loginRef = useRef<HTMLInputElement | null>(null);
+  const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const errorMessage = useAppSelector((state) => state.error);
+  const errorMessage = useAppSelector(errorsSelector);
 
   const dispatch = useDispatch<AppDispatch>();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
+    if (emailRef.current !== null && passwordRef.current !== null) {
       dispatch(loginAction({
-        login: loginRef.current.value,
+        email: emailRef.current.value,
         password: passwordRef.current.value
       }));
     }
@@ -35,7 +36,7 @@ function SignInPage(): JSX.Element {
       </header>
 
       <div className="sign-in user-page__content">
-        <form action="#" className="sign-in__form" onSubmit={handleSubmit}>
+        <form className="sign-in__form" onSubmit={handleSubmit}>
 
           {errorMessage && (
             <div className="sign-in__message">
@@ -46,7 +47,7 @@ function SignInPage(): JSX.Element {
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email"
-                id="user-email" ref={loginRef}
+                id="user-email" ref={emailRef}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>

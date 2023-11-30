@@ -2,7 +2,7 @@ import {JSX, useState} from 'react';
 import classNames from 'classnames';
 import OverviewComponent, {OverviewProps} from './FilmPage/OverviewComponent.tsx';
 import DetailsComponent, {DetailsProps} from './FilmPage/DetailsComponent.tsx';
-import ReviewsComponent, {ReviewsProps} from './FilmPage/ReviewsComponent.tsx';
+import ReviewsComponent, {ReviewComponentProps} from './FilmPage/ReviewsComponent.tsx';
 
 enum TabsTitle {
   Overview = 'Overview',
@@ -15,7 +15,7 @@ type FilmPageLinksProps = {
   view: JSX.Element;
 }
 
-type TabsProps = OverviewProps & ReviewsProps & DetailsProps;
+type TabsProps = OverviewProps & DetailsProps & ReviewComponentProps;
 
 function Tabs(props: TabsProps): JSX.Element {
   const links: FilmPageLinksProps[] = [

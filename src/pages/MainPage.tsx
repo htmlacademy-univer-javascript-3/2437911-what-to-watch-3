@@ -6,22 +6,23 @@ import {Helmet} from 'react-helmet-async';
 import GenresList from '../components/GenresList.tsx';
 import {useAppSelector} from '../store';
 import NotFoundPage from './NotFoundPage.tsx';
+import {genreFilmsSelector, promoFilmSelector} from '../store/selectors/selectors.ts';
 
 const PAGE_FILMS_COUNT = 8;
 
 function MainPage(): JSX.Element {
-  const promoFilm = useAppSelector((state) => state.promoFilm);
-  const genreFilms = useAppSelector((state) => state.genreFilms);
+  const promoFilm = useAppSelector(promoFilmSelector);
+  const genreFilms = useAppSelector(genreFilmsSelector);
   const [pageCountFilms, setPageCountFilms] = useState(PAGE_FILMS_COUNT);
 
-  if (promoFilm === undefined) {
+  if (!promoFilm.data) {
     return (<NotFoundPage/>);
   }
 
   return (
     <>
       <Helmet><title>WTW</title></Helmet>
-      <PromoFilmCard film={promoFilm}/>
+      <PromoFilmCard film={promoFilm.data}/>
 
       <div className="page-content">
         <section className="catalog">

@@ -1,13 +1,12 @@
 import {JSX} from 'react';
-import {Person} from '../../types/person.ts';
 import {Rating} from '../../consts/rating.ts';
 
 export type OverviewProps = {
-  ratingScore: number;
-  overview: string;
-  ratingsCount: number;
-  director: Person;
-  starring: Person[];
+  rating: number;
+  description: string;
+  scoresCount: number;
+  director: string;
+  starring: string[];
 }
 
 function setRatingText(ratingScore: number): string {
@@ -30,33 +29,31 @@ function setRatingText(ratingScore: number): string {
   return 'Awesome';
 }
 
-function OverviewComponent({ratingScore, ratingsCount, overview, director, starring}: OverviewProps): JSX.Element {
+function OverviewComponent({rating, scoresCount, description, director, starring}: OverviewProps): JSX.Element {
   return (
     <>
       <div className="film-rating">
-        <div className="film-rating__score">{ratingScore.toString().replace('.', ',')}</div>
+        <div className="film-rating__score">{rating.toString().replace('.', ',')}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{setRatingText(ratingScore)}</span>
-          <span className="film-rating__count">{ratingsCount} ratings</span>
+          <span className="film-rating__level">{setRatingText(rating)}</span>
+          <span className="film-rating__count">{scoresCount} ratings</span>
         </p>
       </div>
 
       <div className="film-card__text">
-        {overview
+        {description
           .split('\n')
           .map((over) => (<p key={over.slice(0, 10)}>{over}</p>))}
 
         <p className="film-card__director">
           <strong>
-            Director: {`${director.firstName} ${director.lastName}`}
+            Director: {director}
           </strong>
         </p>
 
         <p className="film-card__starring">
           <strong>
-            Starring: {starring
-              .map((p) => `${p.firstName} ${p.lastName}`)
-              .join(', ')}
+            Starring: {starring.join(', ')}
           </strong>
         </p>
       </div>

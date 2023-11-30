@@ -1,22 +1,35 @@
-import {JSX, useState} from 'react';
+import {JSX, useEffect, useState} from 'react';
 import {Helmet} from 'react-helmet-async';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import VideoPlayer from '../components/VideoPlayer.tsx';
+import {useAppSelector} from '../store';
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '../types/state.ts';
+import {fetchFilm} from '../store/api-actions.ts';
+import NotFoundPage from './NotFoundPage.tsx';
+import {filmSelector} from '../store/selectors/selectors.ts';
 
-type PlayerProps = {
-  videoSrc: string;
-  posterSrc: string;
-  title: string;
-}
-
-function PlayerPage({videoSrc, posterSrc, title}: PlayerProps): JSX.Element {
+function PlayerPage(): JSX.Element {
   const [isPlaying, setIsPlaying] = useState(false);
   const navigate = useNavigate();
 
+  const id = useParams().id || '';
+  const film = useAppSelector(filmSelector);
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    if (!film.data || film.data.id !== id) {
+      dispatch(fetchFilm(id));
+    }
+  }, [id, film, dispatch]);
+
+  if (!film.data) {
+    return (<NotFoundPage/>);
+  }
+
   return (
     <div className="player">
-      <Helmet><title>{title} player</title></Helmet>
-      <VideoPlayer videoSrc={videoSrc} posterSrc={posterSrc}
+      <Helmet><title>{film.data.name} player</title></Helmet>
+      <VideoPlayer videoSrc={film.data.videoLink} posterSrc={film.data.posterImage}
         className='player__video' isMuted={false} isPlaying={isPlaying}
       />
 

@@ -1,23 +1,22 @@
 import {Fragment, JSX} from 'react';
-import {Person} from '../../types/person.ts';
 import {Genre} from '../../consts/genre.ts';
 
 export type DetailsProps = {
-  director: Person;
-  starring: Person[];
-  runTimeMinute: number;
-  releaseDate: string;
+  director: string;
+  starring: string[];
+  runTime: number;
+  released: string;
   genre: Genre;
 }
 
-function DetailsComponent({director, starring, runTimeMinute, releaseDate, genre}: DetailsProps): JSX.Element {
+function DetailsComponent({director, starring, runTime, released, genre}: DetailsProps): JSX.Element {
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Director</strong>
           <span className="film-card__details-value">
-            {`${director.firstName} ${director.lastName}`}
+            {director}
           </span>
         </p>
         <p className="film-card__details-item">
@@ -25,13 +24,13 @@ function DetailsComponent({director, starring, runTimeMinute, releaseDate, genre
           <span className="film-card__details-value">
             {
               starring
-                .map((p, index) => (
+                .map((person, index) => (
                   index + 1 === starring.length
                     ?
-                    `${p.firstName} ${p.lastName}`
+                    person
                     :
-                    <Fragment key={`${p.firstName} ${p.lastName}`}>
-                      {`${p.firstName} ${p.lastName}`}, <br/>
+                    <Fragment key={person}>
+                      {person}, <br/>
                     </Fragment>
                 ))
             }
@@ -42,7 +41,7 @@ function DetailsComponent({director, starring, runTimeMinute, releaseDate, genre
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{runTimeMinute}</span>
+          <span className="film-card__details-value">{runTime}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
@@ -50,7 +49,7 @@ function DetailsComponent({director, starring, runTimeMinute, releaseDate, genre
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
-          <span className="film-card__details-value">{releaseDate}</span>
+          <span className="film-card__details-value">{released}</span>
         </p>
       </div>
     </div>
