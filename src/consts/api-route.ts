@@ -4,6 +4,7 @@ export const ApiRoute = {
   SimilarFilms: (id?: string) => `/films/${id || ':id'}/similar`,
   PromoFilm: '/promo',
   Favorite: '/favorite',
+  FavoriteFilms: '/wtw/favorite',
   UpdateFavoriteStatus: (id?: string, status?: number) => `/favorite/${id || ':id'}/${status || ':status'}`,
   Comments: (id?: string) => `/comments/${id || ':id'}`,
   AddComment: (id?: string) => `/comments/${id || ':id'}`,
