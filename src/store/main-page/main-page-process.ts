@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {checkAuthAction, fetchFilmsAction, fetchPromoFilm} from '../api-actions.ts';
+import {fetchFilms, fetchPromoFilm} from '../api-actions.ts';
 import {NameSpace} from '../../consts/namespace.ts';
 import {FetchAllFilms, FetchFilms, FetchPromoFilm} from '../../types/state.ts';
 import {Genre} from '../../consts/genre.ts';
@@ -34,16 +34,16 @@ export const mainPageProcess = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchFilmsAction.pending, (state) => {
+      .addCase(fetchFilms.pending, (state) => {
         state.films.isLoading = true;
         state.films.hasError = false;
       })
-      .addCase(fetchFilmsAction.fulfilled, (state, action) => {
+      .addCase(fetchFilms.fulfilled, (state, action) => {
         state.films.films = action.payload;
         state.genreFilms = action.payload;
         state.films.isLoading = false;
       })
-      .addCase(checkAuthAction.rejected, (state) => {
+      .addCase(fetchFilms.rejected, (state) => {
         state.films.hasError = true;
         state.films.isLoading = false;
       })

@@ -10,10 +10,10 @@ import {AppRoute} from '../consts/app-route.ts';
 import {Review} from '../types/review.ts';
 import {sendReviewData} from '../components/ReviewForm.tsx';
 
-export const fetchFilmsAction = createAsyncThunk<FilmPreview[], undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
+export const fetchFilms = createAsyncThunk<FilmPreview[], undefined, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
 }>(
   'data/fetchFilms',
   async (_arg, {extra: api}) => {
@@ -23,9 +23,9 @@ export const fetchFilmsAction = createAsyncThunk<FilmPreview[], undefined, {
 );
 
 export const fetchPromoFilm = createAsyncThunk<PromoFilm, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
 }>(
   'data/fetchPromoFilm',
   async (_arg, {extra: api}) => {
@@ -35,9 +35,9 @@ export const fetchPromoFilm = createAsyncThunk<PromoFilm, undefined, {
 );
 
 export const fetchFilm = createAsyncThunk<Film, string, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
 }>(
   'data/fetchFilm',
   async (id, {dispatch, extra: api}) => {
@@ -48,9 +48,9 @@ export const fetchFilm = createAsyncThunk<Film, string, {
 );
 
 export const fetchSimilarFilms = createAsyncThunk<FilmPreview[], string, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
 }>(
   'data/fetchSimilarFilms',
   async (id, {extra: api}) => {
@@ -60,9 +60,9 @@ export const fetchSimilarFilms = createAsyncThunk<FilmPreview[], string, {
 );
 
 export const fetchReviews = createAsyncThunk<Review[], string, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
 }>(
   'data/fetchFilmReviews',
   async (id, {extra: api}) => {
@@ -71,10 +71,22 @@ export const fetchReviews = createAsyncThunk<Review[], string, {
   },
 );
 
+export const fetchFavoriteFilms = createAsyncThunk<FilmPreview[], undefined, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+}>(
+  'data/fetchFavoriteFilms',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<FilmPreview[]>(ApiRoute.FavoriteFilms);
+    return data;
+  }
+);
+
 export const addReview = createAsyncThunk<void, sendReviewData, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
 }>(
   'data/addFilmReviews',
   async ({id, rating, comment}, {dispatch, extra: api}) => {
@@ -88,9 +100,9 @@ export const addReview = createAsyncThunk<void, sendReviewData, {
 );
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
 }>(
   'auth/checkAuth',
   async (_arg, {extra: api}) => {
@@ -99,9 +111,9 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
 );
 
 export const loginAction = createAsyncThunk<void, AuthData, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
 }>(
   'auth/login',
   async ({email, password}, {dispatch, extra: api}) => {
@@ -115,9 +127,9 @@ export const loginAction = createAsyncThunk<void, AuthData, {
 );
 
 export const logoutAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
 }>(
   'auth/logout',
   async (_arg, {extra: api}) => {
