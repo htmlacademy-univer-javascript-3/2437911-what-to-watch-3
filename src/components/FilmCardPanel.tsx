@@ -4,16 +4,17 @@ import {AppRoute} from '../consts/app-route.ts';
 import {useAppSelector} from '../store';
 import {PromoFilm} from '../types/film-data.ts';
 import {AuthorizationStatus} from '../consts/authorization-status.ts';
+import {getAuthStatus} from '../store/auth/selector.ts';
 
 type FilmCardPanelProps = {
-  film: PromoFilm;
-  hasReviewButton: boolean;
+    film: PromoFilm;
+    hasReviewButton: boolean;
 };
 
 function FilmCardPanel({film, hasReviewButton}: FilmCardPanelProps): JSX.Element {
   const {id, name, genre, released} = film;
   const navigate = useNavigate();
-  const isAuth = useAppSelector((state) => state.authStatus) === AuthorizationStatus.Auth;
+  const isAuth = useAppSelector(getAuthStatus) === AuthorizationStatus.Auth;
 
   return (
     <div className="film-card__desc">
@@ -32,6 +33,7 @@ function FilmCardPanel({film, hasReviewButton}: FilmCardPanelProps): JSX.Element
           </svg>
           <span>Play</span>
         </button>
+
         <button className="btn btn--play film-card__button" type="button"
           onClick={() => navigate(AppRoute.MyList)}
         >
@@ -41,6 +43,7 @@ function FilmCardPanel({film, hasReviewButton}: FilmCardPanelProps): JSX.Element
           <span>My list</span>
           <span className="film-card__count">9</span>
         </button>
+
         {hasReviewButton && isAuth && (
           <Link to={AppRoute.AddReview(id)} className="btn film-card__button">Add review</Link>
         )}

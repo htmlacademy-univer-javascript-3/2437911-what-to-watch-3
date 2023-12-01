@@ -6,40 +6,41 @@ import FilmCardPanel from '../components/FilmCardPanel.tsx';
 import WTWLogo from '../components/WTWLogo.tsx';
 import UserBlock from '../components/UserBlock.tsx';
 import Tabs from '../components/Tabs.tsx';
-import NotFoundPage from './NotFoundPage.tsx';
 import {useParams} from 'react-router-dom';
 import {useAppSelector} from '../store';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../types/state.ts';
 import {fetchFilm, fetchReviews, fetchSimilarFilms} from '../store/api-actions.ts';
-import {filmSelector, reviewsSelector, similarFilmsSelector} from '../store/selectors/selectors.ts';
+import {getFilm, getReviews, getSimilarFilms} from '../store/film/selectors.ts';
+import ErrorPage from './ErrorPage.tsx';
 
 function FilmPage(): JSX.Element {
   const id = useParams().id || '';
-  const film = useAppSelector(filmSelector);
-  const similarFilms = useAppSelector(similarFilmsSelector);
-  const reviews = useAppSelector(reviewsSelector);
+  const fetchFilmInfo = useAppSelector(getFilm);
+  const film = fetchFilmInfo.data;
+  const similarFilms = useAppSelector(getSimilarFilms);
+  const reviews = useAppSelector(getReviews);
 
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    if (!film.data || film.data.id !== id) {
+    if (!film || film.id !== id) {
       dispatch(fetchFilm(id));
       dispatch(fetchSimilarFilms(id));
       dispatch(fetchReviews(id));
     }
   }, [id, film, dispatch]);
 
-  if (!film.data) {
-    return <NotFoundPage/>;
+  if (!film || fetchFilmInfo.hasError) {
+    return <ErrorPage message={'Не удалось загрузить фильм :('}/>;
   }
 
   return (
     <>
       <section className="film-card film-card--full">
-        <Helmet><title>{film.data.name}</title></Helmet>
+        <Helmet><title>{film.name}</title></Helmet>
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={`${film.data.backgroundImage}`} alt={film.data.name}/>
+            <img src={`${film.backgroundImage}`} alt={film.name}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -49,23 +50,23 @@ function FilmPage(): JSX.Element {
           </header>
 
           <div className="film-card__wrap">
-            <FilmCardPanel film={film.data} hasReviewButton/>
+            <FilmCardPanel film={film} hasReviewButton/>
           </div>
         </div>
 
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={`${film.data.posterImage}`} alt={film.data.name} width="218" height="327"/>
+              <img src={`${film.posterImage}`} alt={film.name} width="218" height="327"/>
             </div>
 
-            <Tabs {...film.data} reviews={reviews.data}/>
+            <Tabs {...film} reviews={reviews}/>
           </div>
         </div>
       </section>
 
       <div className="page-content">
-        <CatalogLikeThis films={similarFilms.data}/>
+        <CatalogLikeThis films={similarFilms}/>
         <Footer/>
       </div>
     </>

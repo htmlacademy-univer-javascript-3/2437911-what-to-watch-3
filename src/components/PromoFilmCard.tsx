@@ -1,26 +1,22 @@
-import {JSX} from 'react';
+import {JSX, memo} from 'react';
 import FilmCardPanel from './FilmCardPanel.tsx';
 import WTWLogo from './WTWLogo.tsx';
 import UserBlock from './UserBlock.tsx';
-import {AuthorizationStatus} from '../consts/authorization-status.ts';
 import {defaultBackground} from '../consts/src-path.ts';
 import {PromoFilm} from '../types/film-data.ts';
-import {useAppSelector} from '../store';
 
-type PromoFIlmCardProps = & {
-  film: PromoFilm;
+type PromoFilmCardProps = & {
+    film?: PromoFilm;
+    fullInfoShow: boolean;
 };
 
-function PromoFilmCard({film}: PromoFIlmCardProps): JSX.Element {
-  const {name, backgroundImage, posterImage} = film;
-  const authStatus = useAppSelector((state) => state.authStatus);
-  const isAuth = authStatus === AuthorizationStatus.Auth;
+function PromoFilmCard({film, fullInfoShow}: PromoFilmCardProps): JSX.Element {
 
   return (
     <section className="film-card">
       <div className="film-card__bg">
-        {isAuth
-          ? <img src={backgroundImage} alt={name}/>
+        {film && fullInfoShow
+          ? <img src={film.backgroundImage} alt={film.name}/>
           : <img src={defaultBackground} alt='background-image'/>}
       </div>
 
@@ -31,11 +27,11 @@ function PromoFilmCard({film}: PromoFIlmCardProps): JSX.Element {
         <UserBlock/>
       </header>
 
-      {isAuth && (
+      {film && fullInfoShow && (
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={posterImage} alt={name} width="218" height="327"/>
+              <img src={film.posterImage} alt={film.name} width="218" height="327"/>
             </div>
 
             <FilmCardPanel film={film} hasReviewButton={false}/>
@@ -46,4 +42,4 @@ function PromoFilmCard({film}: PromoFIlmCardProps): JSX.Element {
   );
 }
 
-export default PromoFilmCard;
+export default memo(PromoFilmCard);

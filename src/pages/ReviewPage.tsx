@@ -6,30 +6,32 @@ import {AppRoute} from '../consts/app-route.ts';
 import {Helmet} from 'react-helmet-async';
 import ReviewForm from '../components/ReviewForm.tsx';
 import {useAppSelector} from '../store';
-import NotFoundPage from './NotFoundPage.tsx';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../types/state.ts';
 import {fetchFilm} from '../store/api-actions.ts';
-import {filmSelector} from '../store/selectors/selectors.ts';
+import {getFilm} from '../store/film/selectors.ts';
+import ErrorPage from './ErrorPage.tsx';
 
 const MINRATING = 1;
 const MAXRATING = 10;
 
 function ReviewPage(): JSX.Element {
   const id = useParams().id || '';
-  const film = useAppSelector(filmSelector);
+  const fetchFilmInfo = useAppSelector(getFilm);
+  const film = fetchFilmInfo.data;
   const dispatch = useDispatch<AppDispatch>();
+
   useEffect(() => {
-    if (!film.data || film.data.id !== id) {
+    if (!film || film.id !== id) {
       dispatch(fetchFilm(id));
     }
   }, [id, film, dispatch]);
 
-  if (!film.data) {
-    return (<NotFoundPage/>);
+  if (!film || fetchFilmInfo.hasError) {
+    return (<ErrorPage message={'Не удалось загрузить фильм :('}/>);
   }
 
-  const {name, backgroundImage, posterImage} = film.data;
+  const {name, backgroundImage, posterImage} = film;
 
   return (
     <section className="film-card film-card--full">

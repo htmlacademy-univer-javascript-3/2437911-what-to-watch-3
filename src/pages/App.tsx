@@ -14,11 +14,12 @@ import browserHistory from '../browser-history/browser-history.ts';
 import FilmPage from './FilmPage.tsx';
 import ReviewPage from './ReviewPage.tsx';
 import PlayerPage from './PlayerPage.tsx';
-import {authStatusSelector, getFilmsLoadingStatus} from '../store/selectors/selectors.ts';
+import {getAuthStatus} from '../store/auth/selector.ts';
+import {getFilms} from '../store/main-page/selectors.ts';
 
 function App(): JSX.Element {
-  const authorizationStatus = useAppSelector(authStatusSelector);
-  const isFilmsDataLoading = useAppSelector(getFilmsLoadingStatus);
+  const authorizationStatus = useAppSelector(getAuthStatus);
+  const isFilmsDataLoading = useAppSelector(getFilms).isLoading;
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isFilmsDataLoading) {
     return (

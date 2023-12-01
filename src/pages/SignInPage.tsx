@@ -5,13 +5,13 @@ import {Helmet} from 'react-helmet-async';
 import {loginAction} from '../store/api-actions.ts';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../types/state.ts';
-import {errorsSelector} from '../store/selectors/selectors.ts';
 import {useAppSelector} from '../store';
+import {getAuthError} from '../store/auth/selector.ts';
 
 function SignInPage(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const errorMessage = useAppSelector(errorsSelector);
+  const errorMessage = useAppSelector(getAuthError);
 
   const dispatch = useDispatch<AppDispatch>();
 

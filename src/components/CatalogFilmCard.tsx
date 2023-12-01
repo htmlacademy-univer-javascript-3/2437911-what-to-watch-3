@@ -1,4 +1,4 @@
-import {JSX} from 'react';
+import {JSX, memo} from 'react';
 import {FilmPreview} from '../types/film-data.ts';
 import VideoPlayer from './VideoPlayer.tsx';
 import {Link} from 'react-router-dom';
@@ -35,4 +35,4 @@ function CatalogFilmCard({
   );
 }
 
-export default CatalogFilmCard;
+export default memo(CatalogFilmCard);
