@@ -5,6 +5,7 @@ import {useAppSelector} from '../store';
 import {PromoFilm} from '../types/film-data.ts';
 import {AuthorizationStatus} from '../consts/authorization-status.ts';
 import {getAuthStatus} from '../store/auth/selector.ts';
+import AddFavoriteFilmButton from './AddFavoriteFilmButtonProps.tsx';
 
 type FilmCardPanelProps = {
     film: PromoFilm;
@@ -34,15 +35,7 @@ function FilmCardPanel({film, hasReviewButton}: FilmCardPanelProps): JSX.Element
           <span>Play</span>
         </button>
 
-        <button className="btn btn--play film-card__button" type="button"
-          onClick={() => navigate(AppRoute.MyList)}
-        >
-          <svg viewBox="0 0 19 20" width="19" height="20">
-            <use xlinkHref="#add"></use>
-          </svg>
-          <span>My list</span>
-          <span className="film-card__count">9</span>
-        </button>
+        <AddFavoriteFilmButton filmId={id}/>
 
         {hasReviewButton && isAuth && (
           <Link to={AppRoute.AddReview(id)} className="btn film-card__button">Add review</Link>

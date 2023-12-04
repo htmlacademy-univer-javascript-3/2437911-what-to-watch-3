@@ -1,13 +1,13 @@
 import {JSX, memo} from 'react';
 
 type PlayerBarProps = {
-  isPlaying: boolean;
-  setIsPlaying: (b: boolean) => void;
+    isPlaying: boolean;
+    setIsPlaying: (b: boolean) => void;
+    handleFullScreenButtonClick?: () => void;
 }
 
-function PlayerBar({isPlaying, setIsPlaying}: PlayerBarProps): JSX.Element {
+function PlayerBar({isPlaying, setIsPlaying, handleFullScreenButtonClick}: PlayerBarProps): JSX.Element {
   return (
-
     <div className="player__controls-row">
 
       {isPlaying
@@ -20,7 +20,7 @@ function PlayerBar({isPlaying, setIsPlaying}: PlayerBarProps): JSX.Element {
           </button>
         )
         : (
-          <button type="button" className="player__play" onClick={() => setIsPlaying(false)}>
+          <button type="button" className="player__play" onClick={() => setIsPlaying(true)}>
             <svg viewBox="0 0 19 19" width="19" height="19">
               <use xlinkHref="#play-s"></use>
             </svg>
@@ -31,7 +31,7 @@ function PlayerBar({isPlaying, setIsPlaying}: PlayerBarProps): JSX.Element {
       <div className="player__name">Transpotting</div>
 
       <button type="button" className="player__full-screen">
-        <svg viewBox="0 0 27 27" width="27" height="27">
+        <svg viewBox="0 0 27 27" width="27" height="27" onClick={handleFullScreenButtonClick}>
           <use xlinkHref="#full-screen"></use>
         </svg>
         <span>Full screen</span>

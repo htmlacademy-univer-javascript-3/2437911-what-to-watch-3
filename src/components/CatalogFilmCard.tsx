@@ -1,14 +1,16 @@
 import {JSX, memo} from 'react';
 import {FilmPreview} from '../types/film-data.ts';
-import VideoPlayer from './VideoPlayer.tsx';
+import MiniVideoPlayer from './MiniVideoPlayer.tsx';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../consts/app-route.ts';
 
 export type CatalogFilmCardProp = {
-  film: FilmPreview;
-  isPlaying: boolean;
-  setSelectedFilm: (id?: string) => void;
+    film: FilmPreview;
+    isPlaying: boolean;
+    setSelectedFilm: (id?: string) => void;
 };
+
+const VIDEO_PLAY_DELAY = 1000;
 
 function CatalogFilmCard({
   film,
@@ -23,8 +25,9 @@ function CatalogFilmCard({
     >
 
       <Link to={`${AppRoute.Film(id)}`}>
-        <VideoPlayer videoSrc={previewVideoLink} posterSrc={previewImage} className="small-film-card__image" isMuted
-          isPlaying={isPlaying} width="280" height="175"
+        <MiniVideoPlayer videoSrc={previewVideoLink} posterSrc={previewImage} className="small-film-card__image"
+          isMuted
+          isPlaying={isPlaying} width="280" height="175" videoPlayDelay={VIDEO_PLAY_DELAY}
         />
       </Link>
 

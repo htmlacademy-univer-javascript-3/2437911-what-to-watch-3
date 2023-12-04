@@ -1,25 +1,25 @@
 import {JSX, useEffect, useRef, useState} from 'react';
 
 type VideoPlayerProps = {
-  videoSrc: string;
-  posterSrc?: string;
-  className?: string;
-  isMuted: boolean;
-  isPlaying: boolean;
-  width?: string | number;
-  height?: string | number;
+    videoSrc: string;
+    posterSrc?: string;
+    className?: string;
+    isMuted: boolean;
+    isPlaying: boolean;
+    width?: string | number;
+    height?: string | number;
+    videoPlayDelay?: number;
 }
 
-const VIDEO_PLAY_DELAY = 1000;
-
-function VideoPlayer({
+function MiniVideoPlayer({
   videoSrc,
   posterSrc,
   className,
   isMuted,
   isPlaying,
   width,
-  height
+  height,
+  videoPlayDelay
 }: VideoPlayerProps): JSX.Element {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -43,17 +43,16 @@ function VideoPlayer({
     if (!isLoaded || !videoPlayer) {
       return;
     }
-
     const timerId = setTimeout(() => {
       if (isPlaying) {
         videoPlayer.play();
       }
-    }, VIDEO_PLAY_DELAY);
+    }, videoPlayDelay);
 
     videoPlayer.load();
 
     return () => clearTimeout(timerId);
-  }, [isPlaying, isLoaded]);
+  }, [isPlaying, isLoaded, videoPlayDelay]);
 
   return (
     <video poster={posterSrc && `${posterSrc}`}
@@ -65,4 +64,4 @@ function VideoPlayer({
   );
 }
 
-export default VideoPlayer;
+export default MiniVideoPlayer;

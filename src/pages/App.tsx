@@ -16,6 +16,8 @@ import ReviewPage from './ReviewPage.tsx';
 import PlayerPage from './PlayerPage.tsx';
 import {getAuthStatus} from '../store/auth/selector.ts';
 import {getFilms} from '../store/main-page/selectors.ts';
+import PrivateRoute from '../components/PrivateRoute.tsx';
+import MyListPage from './MyListPage.tsx';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthStatus);
@@ -38,12 +40,12 @@ function App(): JSX.Element {
             }
           />
           <Route path={AppRoute.SignIn} element={<SignInPage/>}/>
-          {/*<Route path={AppRoute.MyList} element={*/}
-          {/*  <PrivateRoute>*/}
-          {/*    <MyListPage/>*/}
-          {/*  </PrivateRoute>*/}
-          {/*}*/}
-          {/*/>*/}
+          <Route path={AppRoute.MyList} element={
+            <PrivateRoute>
+              <MyListPage/>
+            </PrivateRoute>
+          }
+          />
           <Route path={AppRoute.Film()}
             element={
               <FilmPage/>

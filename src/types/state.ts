@@ -49,3 +49,7 @@ export type FetchPromoFilm = WithLoading & WithError & {
 export type FetchReviews = WithLoading & WithError & {
     data: Review[];
 };
+
+export type MyListInfo = {
+    films: FetchFilms;
+}
