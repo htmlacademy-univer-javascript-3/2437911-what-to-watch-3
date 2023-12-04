@@ -7,12 +7,13 @@ import {useAppSelector} from '../store';
 import {AppDispatch} from '../types/state.ts';
 import {useDispatch} from 'react-redux';
 import {logoutAction} from '../store/api-actions.ts';
+import {getAuthStatus} from '../store/auth/selector.ts';
 
 function UserBlock(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authStatus);
+  const isAuth = useAppSelector(getAuthStatus) === AuthorizationStatus.Auth;
   const dispatch = useDispatch<AppDispatch>();
 
-  if (authorizationStatus === AuthorizationStatus.Auth) {
+  if (isAuth) {
     return (
       <ul className="user-block">
         <li className="user-block__item">
@@ -26,7 +27,7 @@ function UserBlock(): JSX.Element {
               dispatch(logoutAction());
             }}
           >
-            Sign out
+                        Sign out
           </a>
         </li>
       </ul>
@@ -37,7 +38,6 @@ function UserBlock(): JSX.Element {
         <Link to={AppRoute.SignIn} className="user-block__link">Sign In</Link>
       </div>
     );
-
   }
 }
 

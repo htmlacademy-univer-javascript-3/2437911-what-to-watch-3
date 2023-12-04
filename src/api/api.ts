@@ -2,7 +2,7 @@ import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} fro
 import {getToken} from './token.ts';
 import {StatusCodes} from 'http-status-codes';
 import {store} from '../store';
-import {setSignInErrorMessage} from '../store/actions.ts';
+import {setSignInError} from '../store/auth/auth-process.ts';
 
 type DetailMessageType = {
   messages: string[];
@@ -46,7 +46,7 @@ export const createApi = (): AxiosInstance => {
       if (error.response && shouldDisplayError(error.response)) {
         const detailMessage: MessageType = <MessageType>(error.response.data);
 
-        store.dispatch(setSignInErrorMessage(detailMessage.details[0].messages[0]));
+        store.dispatch(setSignInError(detailMessage.details[0].messages[0]));
       }
 
       throw error;

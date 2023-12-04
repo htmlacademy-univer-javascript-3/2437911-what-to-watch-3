@@ -5,24 +5,28 @@ import FilmsList from '../components/FilmsList.tsx';
 import {Helmet} from 'react-helmet-async';
 import GenresList from '../components/GenresList.tsx';
 import {useAppSelector} from '../store';
-import NotFoundPage from './NotFoundPage.tsx';
-import {genreFilmsSelector, promoFilmSelector} from '../store/selectors/selectors.ts';
+import {getGenreFilms, getPromoFilm} from '../store/main-page/selectors.ts';
+import {getAuthStatus} from '../store/auth/selector.ts';
+import {AuthorizationStatus} from '../consts/authorization-status.ts';
 
 const PAGE_FILMS_COUNT = 8;
 
 function MainPage(): JSX.Element {
-  const promoFilm = useAppSelector(promoFilmSelector);
-  const genreFilms = useAppSelector(genreFilmsSelector);
+  const fetchPromoFilm = useAppSelector(getPromoFilm);
+  const promoFilm = fetchPromoFilm.data;
+  const genreFilms = useAppSelector(getGenreFilms);
+  const isAuth = useAppSelector(getAuthStatus) === AuthorizationStatus.Auth;
   const [pageCountFilms, setPageCountFilms] = useState(PAGE_FILMS_COUNT);
-
-  if (!promoFilm.data) {
-    return (<NotFoundPage/>);
-  }
 
   return (
     <>
       <Helmet><title>WTW</title></Helmet>
-      <PromoFilmCard film={promoFilm.data}/>
+      {
+        !fetchPromoFilm.hasError && promoFilm
+          ? <PromoFilmCard film={promoFilm} fullInfoShow={isAuth}/>
+          : <PromoFilmCard fullInfoShow={false}/>
+      }
+
 
       <div className="page-content">
         <section className="catalog">
@@ -34,13 +38,13 @@ function MainPage(): JSX.Element {
 
           {
             pageCountFilms < genreFilms.length &&
-            <div className="catalog__more">
-              <button className="catalog__button" type="button"
-                onClick={() => setPageCountFilms(pageCountFilms + PAGE_FILMS_COUNT)}
-              >
-                Show more
-              </button>
-            </div>
+                        <div className="catalog__more">
+                          <button className="catalog__button" type="button"
+                            onClick={() => setPageCountFilms(pageCountFilms + PAGE_FILMS_COUNT)}
+                          >
+                                Show more
+                          </button>
+                        </div>
           }
 
         </section>
