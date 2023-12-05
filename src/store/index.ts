@@ -1,9 +1,9 @@
 import {createApi} from '../api/api.ts';
 import {configureStore} from '@reduxjs/toolkit';
-import {reducer} from './reducer.ts';
+import {reducer} from './reducer/reducer.ts';
 import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import {State} from '../types/state.ts';
-import {redirect} from '../middlewares/redirect.ts';
+import {redirect} from '../middlewares/redirect/redirect.ts';
 
 const api = createApi();
 

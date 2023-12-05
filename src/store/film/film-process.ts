@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {fetchFilm, fetchReviews, fetchSimilarFilms} from '../api-actions.ts';
+import {fetchFilm, fetchReviews, fetchSimilarFilms} from '../actions/api-actions.ts';
 import {NameSpace} from '../../consts/namespace.ts';
 import {AllFetchFilmInfo, FetchFilm, FetchFilms, FetchReviews} from '../../types/state.ts';
 

@@ -11,4 +11,4 @@ export const ApiRoute = {
   CheckLogin: '/login',
   Login: '/login',
   Logout: '/logout'
-};
+} as const;

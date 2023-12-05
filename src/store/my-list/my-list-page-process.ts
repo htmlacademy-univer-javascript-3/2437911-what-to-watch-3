@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {fetchFavoriteFilms} from '../api-actions.ts';
+import {fetchFavoriteFilms} from '../actions/api-actions.ts';
 import {NameSpace} from '../../consts/namespace.ts';
 import {FetchFilms, MyListInfo} from '../../types/state.ts';
 

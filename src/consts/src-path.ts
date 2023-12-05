@@ -1,3 +1,3 @@
-export const imageDirectory = 'img';
+export const IMG_DIR = 'img';
 
-export const defaultBackground = `${imageDirectory}/bg-header.jpg`;
+export const DEFAULT_BACKGROUND = `${IMG_DIR}/bg-header.jpg`;

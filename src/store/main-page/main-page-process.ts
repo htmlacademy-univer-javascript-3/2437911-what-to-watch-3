@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {fetchFilms, fetchPromoFilm} from '../api-actions.ts';
+import {fetchFilms, fetchPromoFilm} from '../actions/api-actions.ts';
 import {NameSpace} from '../../consts/namespace.ts';
 import {FetchAllFilms, FetchFilms, FetchPromoFilm} from '../../types/state.ts';
 import {Genre} from '../../consts/genre.ts';
