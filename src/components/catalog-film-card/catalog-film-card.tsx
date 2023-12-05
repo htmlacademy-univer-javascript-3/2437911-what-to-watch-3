@@ -7,7 +7,7 @@ import {AppRoute} from '../../consts/app-route.ts';
 export type CatalogFilmCardProp = {
   film: FilmPreview;
   isPlaying: boolean;
-  setSelectedFilm: (id?: string) => void;
+  onSetSelectedFilm: (id?: string) => void;
 };
 
 const VIDEO_PLAY_DELAY = 1000;
@@ -15,13 +15,13 @@ const VIDEO_PLAY_DELAY = 1000;
 export function CatalogFilmCard({
   film,
   isPlaying,
-  setSelectedFilm,
+  onSetSelectedFilm,
 }: CatalogFilmCardProp): JSX.Element {
   const {id, name, previewImage, previewVideoLink} = film;
 
   return (
-    <article className="small-film-card catalog__films-card" onMouseEnter={() => setSelectedFilm(id)}
-      onMouseLeave={() => setSelectedFilm()}
+    <article className="small-film-card catalog__films-card" onMouseEnter={() => onSetSelectedFilm(id)}
+      onMouseLeave={() => onSetSelectedFilm()}
     >
 
       <Link to={`${AppRoute.Film(id)}`}>

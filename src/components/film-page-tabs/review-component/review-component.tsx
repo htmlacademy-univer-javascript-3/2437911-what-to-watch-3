@@ -1,6 +1,6 @@
 import {JSX} from 'react';
-import {Review} from '../../types/review.ts';
-import {convertDate} from '../../functions/convert-date.ts';
+import {Review} from '../../../types/review.ts';
+import {convertDate} from '../../../functions/convert-date.ts';
 
 type ReviewProps = {
   review: Review;

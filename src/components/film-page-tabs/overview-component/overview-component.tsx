@@ -1,5 +1,5 @@
 import {JSX} from 'react';
-import {Rating} from '../../consts/rating.ts';
+import {Rating} from '../../../consts/rating.ts';
 
 export type OverviewProps = {
   rating: number;
@@ -9,24 +9,32 @@ export type OverviewProps = {
   starring: string[];
 }
 
+enum RatingText {
+  Bad = 'Bad',
+  Normal = 'Normal',
+  Good = 'Good',
+  VeryGood = 'Very Good',
+  Awesome = 'Awesome'
+}
+
 function setRatingText(ratingScore: number): string {
   if (ratingScore < Rating.Normal) {
-    return 'Bad';
+    return RatingText.Bad;
   }
 
   if (ratingScore < Rating.Good) {
-    return 'Normal';
+    return RatingText.Normal;
   }
 
   if (ratingScore < Rating.VeryGood) {
-    return 'Good';
+    return RatingText.Good;
   }
 
   if (ratingScore < Rating.Awesome) {
-    return 'Very Good';
+    return RatingText.VeryGood;
   }
 
-  return 'Awesome';
+  return RatingText.Awesome;
 }
 
 function OverviewComponent({rating, scoresCount, description, director, starring}: OverviewProps): JSX.Element {

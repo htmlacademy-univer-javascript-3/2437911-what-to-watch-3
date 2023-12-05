@@ -15,7 +15,7 @@ function FilmsList({films}: FilmListProps): JSX.Element {
         films.map((film) => (
           <CatalogFilmCard film={film} key={film.id}
             isPlaying={film.id === selectFilmId}
-            setSelectedFilm={setSelectFilmId}
+            onSetSelectedFilm={setSelectFilmId}
           />
         ))
       }

@@ -1,5 +1,5 @@
 import {Fragment, JSX} from 'react';
-import {Genre} from '../../consts/genre.ts';
+import {Genre} from '../../../consts/genre.ts';
 
 export type DetailsProps = {
   director: string;

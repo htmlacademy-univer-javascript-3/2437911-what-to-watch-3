@@ -77,8 +77,8 @@ function PlayerPage(): JSX.Element {
           <div className="player__time-value">{getDurationFormat(duration)}</div>
         </div>
 
-        <PlayerControls isPlaying={isPlaying} setIsPlaying={handleSetIsPlaying}
-          handleFullScreenButtonClick={handleFullScreenButtonClick}
+        <PlayerControls isPlaying={isPlaying} onSetIsPlaying={handleSetIsPlaying}
+          onFullScreenButtonClick={handleFullScreenButtonClick}
         />
       </div>
     </div>

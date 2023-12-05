@@ -1,8 +1,8 @@
 import {JSX, useState} from 'react';
 import classNames from 'classnames';
-import OverviewComponent, {OverviewProps} from '../FilmPage/overview-component.tsx';
-import DetailsComponent, {DetailsProps} from '../FilmPage/details-component.tsx';
-import ReviewsComponent, {ReviewComponentProps} from '../FilmPage/reviews-component.tsx';
+import OverviewComponent, {OverviewProps} from '../film-page-tabs/overview-component/overview-component.tsx';
+import DetailsComponent, {DetailsProps} from '../film-page-tabs/details-component/details-component.tsx';
+import ReviewsComponent, {ReviewComponentProps} from '../film-page-tabs/reviews-component/reviews-component.tsx';
 
 enum TabsTitle {
   Overview = 'Overview',
