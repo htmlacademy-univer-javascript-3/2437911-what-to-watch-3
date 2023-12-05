@@ -42,7 +42,7 @@ function PlayerPage(): JSX.Element {
     if (videoRef.current?.requestFullscreen) {
       videoRef.current?.requestFullscreen();
     }
-  }, []);
+  }, [videoRef.current]);
 
   if (!film || fetchFilmInfo.hasError) {
     return (<ErrorPage message={'Не удалось загрузить фильм :('}/>);
