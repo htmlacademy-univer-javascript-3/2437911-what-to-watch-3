@@ -9,6 +9,7 @@ import PlayerControls from '../../components/video-player-bar/video-player-bar.t
 import {getFilm} from '../../store/film/selectors.ts';
 import ErrorPage from '../error-page/error-page.tsx';
 import {getDurationFormat} from '../../functions/deration-time-format.ts';
+import LoadingScreen from '../loading-page/loading-screen.tsx';
 
 function PlayerPage(): JSX.Element {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -25,18 +26,34 @@ function PlayerPage(): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    if (!film || film.id !== id) {
-      dispatch(fetchFilm(id));
+    let isMounted = true;
+
+    if (isMounted) {
+      if (!film || film.id !== id) {
+        dispatch(fetchFilm(id));
+      }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [id, film, dispatch]);
 
   useEffect(() => {
-    if (isPlaying) {
-      videoRef.current?.play();
-    } else {
-      videoRef.current?.pause();
+    let isMounted = true;
+
+    if (isMounted) {
+      if (isPlaying) {
+        videoRef.current?.play();
+      } else {
+        videoRef.current?.pause();
+      }
     }
-  }, [isPlaying]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [videoRef, isPlaying]);
 
   const handleFullScreenButtonClick = useCallback(() => {
     if (videoRef.current?.requestFullscreen) {
@@ -48,20 +65,24 @@ function PlayerPage(): JSX.Element {
     return (<ErrorPage message={'Не удалось загрузить фильм :('}/>);
   }
 
-  function handleProgressUpdate() {
+  if (fetchFilmInfo.isLoading) {
+    return <LoadingScreen/>;
+  }
+
+  const handleTimeUpdate = () => {
     const durationTime = videoRef.current?.duration || 0;
     const currentTime = videoRef.current?.currentTime || 0;
     if (durationTime && currentTime) {
       setProgressBar(currentTime / durationTime * 100);
       setDuration(durationTime - currentTime);
     }
-  }
+  };
 
   return (
     <div className="player">
       <Helmet><title>{film.name} player</title></Helmet>
       <video poster={film.posterImage}
-        className='player__video' ref={videoRef} onTimeUpdate={handleProgressUpdate}
+        className='player__video' ref={videoRef} onTimeUpdate={handleTimeUpdate}
       >
         <source src={film.videoLink} type='video/mp4'/>
       </video>

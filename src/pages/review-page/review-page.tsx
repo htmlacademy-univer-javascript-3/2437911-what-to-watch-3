@@ -12,8 +12,10 @@ import {fetchFilm} from '../../store/actions/api-actions.ts';
 import {getFilm} from '../../store/film/selectors.ts';
 import ErrorPage from '../error-page/error-page.tsx';
 
-const MINRATING = 1;
-const MAXRATING = 10;
+const RatingScore = {
+  Min: 1,
+  Max: 10,
+} as const;
 
 function ReviewPage(): JSX.Element {
   const id = useParams().id || '';
@@ -22,9 +24,17 @@ function ReviewPage(): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    if (!film || film.id !== id) {
-      dispatch(fetchFilm(id));
+    let isMounted = true;
+
+    if (isMounted) {
+      if (!film || film.id !== id) {
+        dispatch(fetchFilm(id));
+      }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [id, film, dispatch]);
 
   if (!film || fetchFilmInfo.hasError) {
@@ -65,7 +75,7 @@ function ReviewPage(): JSX.Element {
         </div>
       </div>
 
-      <ReviewForm id={id} minRating={MINRATING} maxRating={MAXRATING}/>
+      <ReviewForm id={id} minRating={RatingScore.Min} maxRating={RatingScore.Max}/>
     </section>
   );
 }

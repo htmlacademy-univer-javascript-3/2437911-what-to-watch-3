@@ -16,7 +16,7 @@ const initialPromoFilmState: FetchPromoFilm = {
   data: undefined
 };
 
-const initialState: FetchAllFilms = {
+export const initialState: FetchAllFilms = {
   films: initialFilmsState,
   genreFilms: [],
   promoFilm: initialPromoFilmState,
@@ -29,7 +29,7 @@ export const mainPageProcess = createSlice({
   reducers: {
     setGenre: (state, action: PayloadAction<Genre>) => {
       state.currentGenre = action.payload;
-      state.genreFilms = state.films.films.filter((film) => film.genre === action.payload);
+      state.genreFilms = state.films.films.filter((film) => film.genre === action.payload || action.payload === Genre.AllGenres);
     },
   },
   extraReducers(builder) {

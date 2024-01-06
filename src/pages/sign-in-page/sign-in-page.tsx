@@ -6,7 +6,7 @@ import {loginAction} from '../../store/actions/api-actions.ts';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../../types/state.ts';
 import {useAppSelector} from '../../store';
-import {getAuthError} from '../../store/auth/selector.ts';
+import {getAuthError} from '../../store/auth/selectors.ts';
 
 function SignInPage(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -15,7 +15,7 @@ function SignInPage(): JSX.Element {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
     if (emailRef.current !== null && passwordRef.current !== null) {
@@ -36,7 +36,7 @@ function SignInPage(): JSX.Element {
       </header>
 
       <div className="sign-in user-page__content">
-        <form className="sign-in__form" onSubmit={handleSubmit}>
+        <form className="sign-in__form" onSubmit={handleFormSubmit}>
 
           {errorMessage && (
             <div className="sign-in__message">

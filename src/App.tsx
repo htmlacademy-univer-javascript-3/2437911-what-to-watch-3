@@ -5,7 +5,6 @@ import SignInPage from './pages/sign-in-page/sign-in-page.tsx';
 import NotFoundPage from './pages/not-found-page/not-found-page.tsx';
 import {AppRoute} from './consts/app-route.ts';
 import {HelmetProvider} from 'react-helmet-async';
-import ScrollToTop from './functions/scroll-to-top.ts';
 import {useAppSelector} from './store';
 import {AuthorizationStatus} from './consts/authorization-status.ts';
 import LoadingScreen from './pages/loading-page/loading-screen.tsx';
@@ -14,7 +13,7 @@ import browserHistory from './browser-history/browser-history.ts';
 import FilmPage from './pages/film-page/film-page.tsx';
 import ReviewPage from './pages/review-page/review-page.tsx';
 import PlayerPage from './pages/player-page/player-page.tsx';
-import {getAuthStatus} from './store/auth/selector.ts';
+import {getAuthStatus} from './store/auth/selectors.ts';
 import {getFilms} from './store/main-page/selectors.ts';
 import PrivateRoute from './components/private-route/private-route.tsx';
 import MyListPage from './pages/my-list-page/my-list-page.tsx';
@@ -32,7 +31,7 @@ function App(): JSX.Element {
   return (
     <HelmetProvider>
       <HistoryRouter history={browserHistory}>
-        <ScrollToTop/>
+        <scrollToTop/>
         <Routes>
           <Route path={AppRoute.Main}
             element={
@@ -52,7 +51,9 @@ function App(): JSX.Element {
             }
           />
           <Route path={AppRoute.AddReview()} element={
-            <ReviewPage/>
+            <PrivateRoute>
+              <ReviewPage/>
+            </PrivateRoute>
           }
           />
           <Route path={AppRoute.Player()}

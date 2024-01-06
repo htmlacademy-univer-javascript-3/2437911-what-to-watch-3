@@ -15,34 +15,42 @@ export type sendReviewData = {
   comment: string;
 }
 
-const MAX_COMMENT_LENGTH = 400;
-const MIN_COMMENT_LENGTH = 50;
+const CommentConstraints = {
+  MaxLength: 400,
+  MinLength: 50,
+} as const;
+
 const MIN_RATING = 0;
 
 function ReviewForm({id, minRating, maxRating}: ReviewFormProps): JSX.Element {
   const ratings: number[] = Array.from(Array(maxRating - minRating + 1).keys()).map((num) => num + 1);
   const dispatch = useDispatch<AppDispatch>();
+  const [isFormActive, setIsFormActive] = useState(true);
+  const [shouldDisplayError, setShouldDisplayError] = useState(false);
 
   const [formData, setFormData] = useState<sendReviewData>({
     id: id,
-    rating: 0,
+    rating: MIN_RATING,
     comment: ''
   });
 
-  const handleOnSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(addReview(formData));
+    setIsFormActive(false);
+    dispatch(addReview(formData)).catch(() => setShouldDisplayError(true)).finally(() => setIsFormActive(true));
   };
 
   return (
     <div className="add-review">
-      <form className="add-review__form" onSubmit={handleOnSubmit}>
+      {shouldDisplayError && <div>Что-то пошло не так! Попробуйте отправить ревью позже</div>}
+      <form className="add-review__form" onSubmit={handleFormSubmit}>
         <div className="rating">
           <div className="rating__stars">
             {ratings.reverse().map((ratingNumber) =>
               (
                 <Fragment key={ratingNumber}>
                   <input className="rating__input" id={`star-${ratingNumber}`} type="radio" name="rating"
+                    disabled={!isFormActive}
                     value={ratingNumber}
                     onChange={(evt) => setFormData({...formData, rating: Number(evt.target.value)})}
                   />
@@ -54,6 +62,7 @@ function ReviewForm({id, minRating, maxRating}: ReviewFormProps): JSX.Element {
 
         <div className="add-review__text">
           <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="ReviewPage text"
+            disabled={!isFormActive}
             value={formData.comment}
             onChange={(evt) => setFormData({...formData, comment: evt.target.value})}
           >
@@ -61,7 +70,7 @@ function ReviewForm({id, minRating, maxRating}: ReviewFormProps): JSX.Element {
 
           <div className="add-review__submit">
             <button className="add-review__btn" type="submit"
-              disabled={formData.comment.length <= MIN_COMMENT_LENGTH || formData.comment.length >= MAX_COMMENT_LENGTH || formData.rating === MIN_RATING}
+              disabled={formData.comment.length <= CommentConstraints.MinLength || formData.comment.length >= CommentConstraints.MaxLength || formData.rating === MIN_RATING}
             >
               Post
             </button>

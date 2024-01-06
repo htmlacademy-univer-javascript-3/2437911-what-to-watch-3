@@ -23,11 +23,19 @@ function FilmPage(): JSX.Element {
 
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    if (!film || film.id !== id) {
-      dispatch(fetchFilm(id));
-      dispatch(fetchSimilarFilms(id));
-      dispatch(fetchReviews(id));
+    let isMounted = true;
+
+    if (isMounted) {
+      if (!film || film.id !== id) {
+        dispatch(fetchFilm(id));
+        dispatch(fetchSimilarFilms(id));
+        dispatch(fetchReviews(id));
+      }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [id, film, dispatch]);
 
   if (!film || fetchFilmInfo.hasError) {
