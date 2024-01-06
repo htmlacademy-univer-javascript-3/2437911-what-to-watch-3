@@ -7,7 +7,6 @@ type ReviewProps = {
 }
 
 function ReviewComponent({review}: ReviewProps): JSX.Element {
-
   return (
     <div className="review">
       <blockquote className="review__quote">

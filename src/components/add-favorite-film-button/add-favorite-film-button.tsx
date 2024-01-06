@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '../../types/state.ts';
 import {updateFilmFavoriteStatus} from '../../store/actions/api-actions.ts';
-import {getAuthStatus} from '../../store/auth/selector.ts';
+import {getAuthStatus} from '../../store/auth/selectors.ts';
 import {AuthorizationStatus} from '../../consts/authorization-status.ts';
 
 type AddFavoriteFilmButtonProps = {
@@ -20,11 +20,10 @@ function AddFavoriteFilmButton({filmId}: AddFavoriteFilmButtonProps): JSX.Elemen
   const isFavorite = favoriteFilms.map((film) => film.id).includes(filmId);
   const isAuth = useAppSelector(getAuthStatus) === AuthorizationStatus.Auth;
 
-  const handleOnClickAddFavorite = () => {
+  const handleFavoriteButtonClick = () => {
     if (isAuth) {
       const action = isFavorite ? 0 : 1;
       dispatch(updateFilmFavoriteStatus({filmId, status: action}));
-      navigate(AppRoute.MyList);
     } else {
       navigate(AppRoute.SignIn);
     }
@@ -32,7 +31,7 @@ function AddFavoriteFilmButton({filmId}: AddFavoriteFilmButtonProps): JSX.Elemen
 
   return (
     <button className="btn btn--play film-card__button" type="button"
-      onClick={handleOnClickAddFavorite}
+      onClick={handleFavoriteButtonClick}
     >
       <svg viewBox="0 0 19 20" width="19" height="20">
         <use xlinkHref={isFavorite ? '#in-list' : '#add'}></use>

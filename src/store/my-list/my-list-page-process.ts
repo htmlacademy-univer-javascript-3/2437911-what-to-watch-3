@@ -9,7 +9,7 @@ const initialFilmsState: FetchFilms = {
   films: []
 };
 
-const initialState: MyListInfo = {
+export const initialState: MyListInfo = {
   films: initialFilmsState,
 };
 

@@ -21,7 +21,7 @@ const fetchFilmInitialState: FetchFilm = {
   data: undefined,
 };
 
-const initialState: AllFetchFilmInfo = {
+export const initialState: AllFetchFilmInfo = {
   film: fetchFilmInitialState,
   reviews: reviewsInitialState,
   similarFilms: similarFilmsInitialState

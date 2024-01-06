@@ -6,7 +6,7 @@ import {Helmet} from 'react-helmet-async';
 import GenresList from '../../components/genres-list/genres-list.tsx';
 import {useAppSelector} from '../../store';
 import {getGenreFilms, getPromoFilm} from '../../store/main-page/selectors.ts';
-import {getAuthStatus} from '../../store/auth/selector.ts';
+import {getAuthStatus} from '../../store/auth/selectors.ts';
 import {AuthorizationStatus} from '../../consts/authorization-status.ts';
 
 const PAGE_FILMS_COUNT = 8;

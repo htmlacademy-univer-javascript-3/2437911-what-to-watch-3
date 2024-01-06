@@ -4,7 +4,7 @@ import {AppRoute} from '../../consts/app-route.ts';
 import {useAppSelector} from '../../store';
 import {PromoFilm} from '../../types/film-data.ts';
 import {AuthorizationStatus} from '../../consts/authorization-status.ts';
-import {getAuthStatus} from '../../store/auth/selector.ts';
+import {getAuthStatus} from '../../store/auth/selectors.ts';
 import AddFavoriteFilmButton from '../add-favorite-film-button/add-favorite-film-button.tsx';
 
 type FilmCardPanelProps = {

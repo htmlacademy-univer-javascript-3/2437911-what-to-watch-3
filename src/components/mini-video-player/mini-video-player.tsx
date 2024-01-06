@@ -1,14 +1,14 @@
 import {JSX, useEffect, useRef, useState} from 'react';
 
 type VideoPlayerProps = {
-    videoSrc: string;
-    posterSrc?: string;
-    className?: string;
-    isMuted: boolean;
-    isPlaying: boolean;
-    width?: string | number;
-    height?: string | number;
-    videoPlayDelay?: number;
+  videoSrc: string;
+  posterSrc?: string;
+  className?: string;
+  isMuted: boolean;
+  isPlaying: boolean;
+  width?: string | number;
+  height?: string | number;
+  videoPlayDelay?: number;
 }
 
 function MiniVideoPlayer({
@@ -26,32 +26,43 @@ function MiniVideoPlayer({
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
+    let isMounted = true;
     const videoPlayer = videoRef.current;
     const dataLoadedHandle = () => {
       setIsLoaded(true);
     };
 
-    videoPlayer?.addEventListener('loadeddata', dataLoadedHandle);
+    if (isMounted) {
+      videoPlayer?.addEventListener('loadeddata', dataLoadedHandle);
+    }
 
     return () => {
       videoPlayer?.removeEventListener('loadeddata', dataLoadedHandle);
+      isMounted = false;
     };
   }, []);
 
   useEffect(() => {
+    let isMounted = true;
     const videoPlayer = videoRef.current;
-    if (!isLoaded || !videoPlayer) {
-      return;
-    }
-    const timerId = setTimeout(() => {
-      if (isPlaying) {
-        videoPlayer.play();
+    let timerId: NodeJS.Timeout;
+    if (isMounted) {
+      if (!isLoaded || !videoPlayer) {
+        return;
       }
-    }, videoPlayDelay);
+      timerId = setTimeout(() => {
+        if (isPlaying) {
+          videoPlayer.play();
+        }
+      }, videoPlayDelay);
 
-    videoPlayer.load();
+      videoPlayer.load();
+    }
 
-    return () => clearTimeout(timerId);
+    return () => {
+      clearTimeout(timerId);
+      isMounted = false;
+    };
   }, [isPlaying, isLoaded, videoPlayDelay]);
 
   return (

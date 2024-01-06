@@ -6,12 +6,14 @@ type CatalogLikeThisProps = {
   films: FilmPreview[];
 }
 
+const SIMILAR_FILMS_COUNT = 4;
+
 function CatalogFilmsLikeThis({films}: CatalogLikeThisProps): JSX.Element {
   return (
     <section className="catalog catalog--like-this">
       <h2 className="catalog__title">More like this</h2>
 
-      <FilmsList films={films}/>
+      <FilmsList films={films.slice(0, SIMILAR_FILMS_COUNT)}/>
     </section>
   );
 }
