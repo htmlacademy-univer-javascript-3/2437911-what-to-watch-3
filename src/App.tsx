@@ -17,6 +17,7 @@ import {getAuthStatus} from './store/auth/selectors.ts';
 import {getFilms} from './store/main-page/selectors.ts';
 import PrivateRoute from './components/private-route/private-route.tsx';
 import MyListPage from './pages/my-list-page/my-list-page.tsx';
+import ScrollToTop from './functions/scroll-to-top.ts';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthStatus);
@@ -31,7 +32,7 @@ function App(): JSX.Element {
   return (
     <HelmetProvider>
       <HistoryRouter history={browserHistory}>
-        <scrollToTop/>
+        <ScrollToTop/>
         <Routes>
           <Route path={AppRoute.Main}
             element={
