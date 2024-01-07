@@ -1,12 +1,13 @@
 import {JSX} from 'react';
 import {Rating} from '../../../consts/rating.ts';
+import {StarringData} from '../../../types/film-data.ts';
 
 export type OverviewProps = {
   rating: number;
   description: string;
   scoresCount: number;
   director: string;
-  starring: string[];
+  starring: StarringData;
 }
 
 enum RatingText {
