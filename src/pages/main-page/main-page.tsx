@@ -6,8 +6,6 @@ import {Helmet} from 'react-helmet-async';
 import GenresList from '../../components/genres-list/genres-list.tsx';
 import {useAppSelector} from '../../store';
 import {getGenreFilms, getPromoFilm} from '../../store/main-page/selectors.ts';
-import {getAuthStatus} from '../../store/auth/selectors.ts';
-import {AuthorizationStatus} from '../../consts/authorization-status.ts';
 
 const PAGE_FILMS_COUNT = 8;
 
@@ -15,16 +13,13 @@ function MainPage(): JSX.Element {
   const fetchPromoFilm = useAppSelector(getPromoFilm);
   const promoFilm = fetchPromoFilm.data;
   const genreFilms = useAppSelector(getGenreFilms);
-  const isAuth = useAppSelector(getAuthStatus) === AuthorizationStatus.Auth;
   const [pageCountFilms, setPageCountFilms] = useState(PAGE_FILMS_COUNT);
 
   return (
     <>
       <Helmet><title>WTW</title></Helmet>
       {
-        !fetchPromoFilm.hasError && promoFilm
-          ? <PromoFilmCard film={promoFilm} fullInfoShow={isAuth}/>
-          : <PromoFilmCard fullInfoShow={false}/>
+        !fetchPromoFilm.hasError && promoFilm && <PromoFilmCard film={promoFilm}/>
       }
 
 

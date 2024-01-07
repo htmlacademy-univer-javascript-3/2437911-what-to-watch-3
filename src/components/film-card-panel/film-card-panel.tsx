@@ -19,7 +19,9 @@ function FilmCardPanel({film, hasReviewButton}: FilmCardPanelProps): JSX.Element
 
   return (
     <div className="film-card__desc">
-      <h2 className="film-card__title">{name}</h2>
+      <Link to={AppRoute.Film(film.id)} className='film-card__title' style={{textDecoration: 'none', color: 'inherit'}}>
+        <h2 className="film-card__title">{name}</h2>
+      </Link>
       <p className="film-card__meta">
         <span className="film-card__genre">{genre}</span>
         <span className="film-card__year">{released}</span>
