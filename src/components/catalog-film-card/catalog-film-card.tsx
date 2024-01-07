@@ -38,4 +38,6 @@ export function CatalogFilmCard({
   );
 }
 
-export default memo(CatalogFilmCard);
+const CatalogFilmCardMemo = memo(CatalogFilmCard);
+
+export default CatalogFilmCardMemo;

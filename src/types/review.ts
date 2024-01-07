@@ -5,3 +5,5 @@ export type Review = {
   date: string;
   comment: string;
 }
+
+export type Reviews = Review[];

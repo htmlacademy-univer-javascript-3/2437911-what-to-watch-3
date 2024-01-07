@@ -18,7 +18,7 @@ function SignInPage(): JSX.Element {
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (emailRef.current !== null && passwordRef.current !== null) {
+    if (emailRef.current && emailRef.current.value !== '' && passwordRef.current && passwordRef.current.value !== '') {
       dispatch(loginAction({
         email: emailRef.current.value,
         password: passwordRef.current.value

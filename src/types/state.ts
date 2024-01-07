@@ -1,7 +1,7 @@
 import {store} from '../store';
 import {AuthorizationStatus} from '../consts/authorization-status.ts';
 import {Film, FilmPreview, PromoFilm} from './film-data.ts';
-import {Review} from './review.ts';
+import {Reviews} from './review.ts';
 import {Genre} from '../consts/genre.ts';
 
 export type State = ReturnType<typeof store.getState>;
@@ -9,47 +9,47 @@ export type State = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export type WithError = {
-    hasError: boolean;
+  hasError: boolean;
 }
 
 export type WithLoading = {
-    isLoading: boolean;
+  isLoading: boolean;
 }
 
 export type UserProcess = {
-    error?: string;
-    authorizationStatus: AuthorizationStatus;
+  error?: string;
+  authorizationStatus: AuthorizationStatus;
 };
 
 export type FetchFilms = WithLoading & WithError & {
-    films: FilmPreview[];
+  films: FilmPreview[];
 };
 
 export type FetchAllFilms = {
-    films: FetchFilms;
-    genreFilms: FilmPreview[];
-    currentGenre: Genre;
-    promoFilm: FetchPromoFilm;
+  films: FetchFilms;
+  genreFilms: FilmPreview[];
+  currentGenre: Genre;
+  promoFilm: FetchPromoFilm;
 };
 
 export type FetchFilm = WithLoading & WithError & {
-    data?: Film;
+  data?: Film;
 }
 
 export type AllFetchFilmInfo = {
-    film: FetchFilm;
-    reviews: FetchReviews;
-    similarFilms: FetchFilms;
+  film: FetchFilm;
+  reviews: FetchReviews;
+  similarFilms: FetchFilms;
 };
 
 export type FetchPromoFilm = WithLoading & WithError & {
-    data?: PromoFilm;
+  data?: PromoFilm;
 };
 
 export type FetchReviews = WithLoading & WithError & {
-    data: Review[];
+  data: Reviews;
 };
 
 export type MyListInfo = {
-    films: FetchFilms;
+  films: FetchFilms;
 }

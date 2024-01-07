@@ -30,9 +30,11 @@ export type Film = {
   rating: number;
   scoresCount: number;
   director: string;
-  starring: string[];
+  starring: StarringData;
   runTime: number;
   genre: Genre;
   released: string;
   isFavorite: boolean;
 }
+
+export type StarringData = string[];

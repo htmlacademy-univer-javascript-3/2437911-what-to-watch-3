@@ -1,9 +1,10 @@
 import {Fragment, JSX} from 'react';
 import {Genre} from '../../../consts/genre.ts';
+import {StarringData} from '../../../types/film-data.ts';
 
 export type DetailsProps = {
   director: string;
-  starring: string[];
+  starring: StarringData;
   runTime: number;
   released: string;
   genre: Genre;

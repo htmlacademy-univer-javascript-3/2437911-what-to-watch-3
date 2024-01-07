@@ -1,12 +1,13 @@
 import {JSX} from 'react';
 import {Rating} from '../../../consts/rating.ts';
+import {StarringData} from '../../../types/film-data.ts';
 
 export type OverviewProps = {
   rating: number;
   description: string;
   scoresCount: number;
   director: string;
-  starring: string[];
+  starring: StarringData;
 }
 
 enum RatingText {
@@ -37,6 +38,8 @@ function setRatingText(ratingScore: number): string {
   return RatingText.Awesome;
 }
 
+const PARAGRAPH_KEY_LENGTH = 10;
+
 function OverviewComponent({rating, scoresCount, description, director, starring}: OverviewProps): JSX.Element {
   return (
     <>
@@ -51,7 +54,7 @@ function OverviewComponent({rating, scoresCount, description, director, starring
       <div className="film-card__text">
         {description
           .split('\n')
-          .map((over) => (<p key={over.slice(0, 10)}>{over}</p>))}
+          .map((over) => (<p key={over.slice(0, PARAGRAPH_KEY_LENGTH)}>{over}</p>))}
 
         <p className="film-card__director">
           <strong>

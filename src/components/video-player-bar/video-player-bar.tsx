@@ -40,4 +40,6 @@ export function VideoPlayerBar({isPlaying, onSetIsPlaying, onFullScreenButtonCli
   );
 }
 
-export default memo(VideoPlayerBar);
+const VideoPlayerBarMemo = memo(VideoPlayerBar);
+
+export default VideoPlayerBarMemo;
