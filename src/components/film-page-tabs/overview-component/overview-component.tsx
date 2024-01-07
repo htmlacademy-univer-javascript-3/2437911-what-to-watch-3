@@ -37,6 +37,8 @@ function setRatingText(ratingScore: number): string {
   return RatingText.Awesome;
 }
 
+const PARAGRAPH_KEY_LENGTH = 10;
+
 function OverviewComponent({rating, scoresCount, description, director, starring}: OverviewProps): JSX.Element {
   return (
     <>
@@ -51,7 +53,7 @@ function OverviewComponent({rating, scoresCount, description, director, starring
       <div className="film-card__text">
         {description
           .split('\n')
-          .map((over) => (<p key={over.slice(0, 10)}>{over}</p>))}
+          .map((over) => (<p key={over.slice(0, PARAGRAPH_KEY_LENGTH)}>{over}</p>))}
 
         <p className="film-card__director">
           <strong>
