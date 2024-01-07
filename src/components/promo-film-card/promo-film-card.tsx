@@ -41,4 +41,6 @@ export function PromoFilmCard({film, fullInfoShow}: PromoFilmCardProps): JSX.Ele
   );
 }
 
-export default memo(PromoFilmCard);
+const PromoFilmCardMemo = memo(PromoFilmCard);
+
+export default PromoFilmCardMemo;
